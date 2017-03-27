@@ -1,9 +1,13 @@
 package com.example.admin.quwang.view.activity;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.WebBean;
@@ -56,7 +60,8 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
 
     private void initwebview() {
         bind.wv.getSettings().setJavaScriptEnabled(true);
-        bind.wv.setWebChromeClient(new WebChromeClient());
+        bind.wv.addJavascriptInterface(new Android(),"zt");
+        bind.wv.setWebViewClient(new WebViewClient());
         bind.wv.setWebChromeClient(webChromeClient);
     }
 
@@ -70,5 +75,24 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
     public void relashWebView(WebResultBean bean) {
         String link_url = bean.getData().getLink_url();
         bind.wv.loadUrl(link_url);
+    }
+
+    private class Android {
+        @JavascriptInterface
+        public void clickOnTopic(int goodsid,int speical_type,int specialId,int goods_attr){
+            Toast.makeText(WebActivity.this, "goods_id"+goodsid, Toast.LENGTH_SHORT).show();
+        }
+        @JavascriptInterface
+        public void clickOnLogin(){
+            Toast.makeText(WebActivity.this, "登陆", Toast.LENGTH_SHORT).show();
+        }
+        @JavascriptInterface
+        public void clickOnCart(){
+            Toast.makeText(WebActivity.this, "购物车", Toast.LENGTH_SHORT).show();
+        }
+        @JavascriptInterface
+        public void clickOnBonus(){
+            Toast.makeText(WebActivity.this, "查看优惠卷", Toast.LENGTH_SHORT).show();
+        }
     }
 }
