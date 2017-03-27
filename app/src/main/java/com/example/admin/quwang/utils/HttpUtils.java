@@ -2,9 +2,11 @@ package com.example.admin.quwang.utils;
 
 import android.util.Log;
 
+import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.bean.ShouYeBean;
 import com.example.admin.quwang.bean.WelcomeBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
+import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.http.ShouYeService;
@@ -75,6 +77,31 @@ public class HttpUtils {
             public void onFailure(Call<ShouYeBean> call, Throwable t) {
             listenr.onError(t.getMessage(),HttpModel.APIERROR);
            t.printStackTrace();
+            }
+        });
+    }
+    public static void loadDeatilsBean(int id, final OnLoadFinishListenr<DetailsBean> loadDataFinishListener) {
+       retrofit.create(DetailsService.class).getDetails(id+"").enqueue(new Callback<DetailsBean>() {
+            @Override
+            public void onResponse(Call<DetailsBean> call, Response<DetailsBean> response) {
+                if (response.isSuccessful()) {
+                    loadDataFinishListener.onSuccess(response.body(), 0);
+                } else {
+                    try {
+                        String string = response.errorBody().string();
+
+                        loadDataFinishListener.onError(string, response.code());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DetailsBean> call, Throwable t) {
+                loadDataFinishListener.onError(t.getMessage(), HttpModel.APIERROR);
+
             }
         });
     }

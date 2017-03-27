@@ -1,6 +1,7 @@
 package com.example.admin.quwang.view.fragment;
 
 import android.animation.ArgbEvaluator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.example.admin.quwang.utils.FliperUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.utils.SuperListViewUtils;
 import com.example.admin.quwang.view.ShouYeView;
+import com.example.admin.quwang.view.activity.DetatilsActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.HorizontalListView;
 import com.example.admin.quwang.view.extend.SuperFliper;
@@ -43,6 +45,8 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     private List<TopAdsBean> bannersList = new ArrayList<>();
     private ShouYePresenter shouYePresenter;
     ArgbEvaluator argbEvaluator=new ArgbEvaluator();
+    private List<HotDailyBean> hotDailyList;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shouye;
@@ -81,6 +85,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void relashHotDaily(List<HotDailyBean> hotDailyBeanList) {
+        this.hotDailyList=hotDailyBeanList;
         List<View> views = FliperUtils.convertToHotDailyView(hotDailyBeanList, a);
         bind.fliper.setAdapter(new SuperFliper.SimpleFlipeAdapter(views));
         bind.fliper.setInAnimation(a, R.anim.slide_from_bottom);
@@ -146,7 +151,10 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void onItemClick(SuperFliper fliper, View itemView, int position) {
-        toast(position + "");
+        HotDailyBean hotDailyBean = hotDailyList.get(position);
+        Intent intent=new Intent(a, DetatilsActivity.class);
+        intent.putExtra("id",hotDailyBean.getId());
+        startActivity(intent);
     }
 
     @Override

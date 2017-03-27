@@ -1,0 +1,16 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <com.example.admin.quwang.view.extend.StateLayout
+        android:id="@+id/status_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_error"></include>
+        <include layout="@layout/layout_loading"></include>
+        <FrameLayout
+            android:id="@+id/container_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </com.example.admin.quwang.view.extend.StateLayout>
+</layout>
