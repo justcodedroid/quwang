@@ -19,14 +19,18 @@ import com.example.admin.quwang.bean.OtherRecommendListBean;
 import com.example.admin.quwang.bean.PromotionListBean;
 import com.example.admin.quwang.bean.ShangPinBean;
 import com.example.admin.quwang.bean.TopAdsBean;
+import com.example.admin.quwang.bean.WebBean;
 import com.example.admin.quwang.databinding.FragmentShouyeBinding;
+import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.presenter.ShouYePresenter;
 import com.example.admin.quwang.utils.BannerUtils;
 import com.example.admin.quwang.utils.FliperUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.utils.SuperListViewUtils;
+import com.example.admin.quwang.utils.WebUtils;
 import com.example.admin.quwang.view.ShouYeView;
 import com.example.admin.quwang.view.activity.DetatilsActivity;
+import com.example.admin.quwang.view.activity.WebActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.HorizontalListView;
 import com.example.admin.quwang.view.extend.SuperFliper;
@@ -44,8 +48,9 @@ import java.util.List;
 public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implements ShouYeView, Banner.OnItemClickListener, HorizontalListView.OnItemClickListener, SuperFliper.OnItemClickListener, TimeView.OnCompleteListener, SuperScrollerView.OnScrolleListener {
     private List<TopAdsBean> bannersList = new ArrayList<>();
     private ShouYePresenter shouYePresenter;
-    ArgbEvaluator argbEvaluator=new ArgbEvaluator();
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private List<HotDailyBean> hotDailyList;
+    private List<HotListBean> hotListBeanList;
 
     @Override
     protected int getLayoutId() {
@@ -79,13 +84,14 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void relashHotListData(List<HotListBean> hotListBeanList) {
+        this.hotListBeanList = hotListBeanList;
         List<View> hotListViews = HorizontalListViewUtils.convertHotListViews(hotListBeanList, a);
         bind.hotListView.setAdapter(new HorizontalListView.SimpleHorizontalAdapter(hotListViews));
     }
 
     @Override
     public void relashHotDaily(List<HotDailyBean> hotDailyBeanList) {
-        this.hotDailyList=hotDailyBeanList;
+        this.hotDailyList = hotDailyBeanList;
         List<View> views = FliperUtils.convertToHotDailyView(hotDailyBeanList, a);
         bind.fliper.setAdapter(new SuperFliper.SimpleFlipeAdapter(views));
         bind.fliper.setInAnimation(a, R.anim.slide_from_bottom);
@@ -124,8 +130,8 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void relashRecommendList(List<ShangPinBean> shangPinBeanList) {
-        Log.e("tag",shangPinBeanList.size()+"");
-        bind.recommandGv.setAdapter(new ShangPinAdapter(shangPinBeanList,a));
+        Log.e("tag", shangPinBeanList.size() + "");
+        bind.recommandGv.setAdapter(new ShangPinAdapter(shangPinBeanList, a));
     }
 
     private void convertTopAdsToViews(List<TopAdsBean> top_ads) {
@@ -141,19 +147,39 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void onItemClick(Banner banner, View itemView, int position) {
-        toast(position + "");
+        TopAdsBean topAdsBean = bannersList.get(position);
+        if (topAdsBean.getType() == HttpModel.TYPEWEB) {
+            WebUtils.startWebActivity(a, topAdsBean.getLink_url(), topAdsBean.getMain_title());
+        }
     }
+
 
     @Override
     public void onItemClick(HorizontalScrollView horizontalScrollView, View itemView, int position) {
-        toast(position + "");
+        if (horizontalScrollView == bind.hotListView) {
+            handleHotListItemClick(position);
+        }
+    }
+
+    private void handleHotListItemClick(int position) {
+        HotListBean hotListBean = hotListBeanList.get(position);
+        if (hotListBean.getType() == HttpModel.TYPEWEB) {
+            if (hotListBean.getLink_url().equals("qdyl")) {
+                toast("个人中心fragnnt 签到");
+            } else {
+                WebUtils.startWebActivity(a, hotListBean.getLink_url(), hotListBean.getMain_title());
+            }
+        }
+        if (hotListBean.getType() == HttpModel.TYPEOTHERWEB) {
+            WebUtils.startOtherWebActivity(a, hotListBean.getLink_url());
+        }
     }
 
     @Override
     public void onItemClick(SuperFliper fliper, View itemView, int position) {
         HotDailyBean hotDailyBean = hotDailyList.get(position);
-        Intent intent=new Intent(a, DetatilsActivity.class);
-        intent.putExtra("id",hotDailyBean.getId());
+        Intent intent = new Intent(a, DetatilsActivity.class);
+        intent.putExtra("id", hotDailyBean.getId());
         startActivity(intent);
     }
 
@@ -165,7 +191,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     @Override
     public void onScroll(int currentY) {
         float v = currentY * 1.0f / dp2px(150);
-        v=Math.min(1.0f,Math.max(0,v));
+        v = Math.min(1.0f, Math.max(0, v));
         int color = (int) argbEvaluator.evaluate(v, Color.TRANSPARENT, Color.parseColor("#dd2929"));
         bind.markView.setBackgroundColor(color);
     }

@@ -21,11 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MainActivity"
-            android:launchMode="singleTask"
-            ></activity>
-        <activity android:name=".view.activity.DetatilsActivity"></activity>
-        <activity android:name=".view.activity.TuPianYuLanActivity"></activity>
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".view.activity.DetatilsActivity" />
+        <activity android:name=".view.activity.TuPianYuLanActivity" />
+        <activity android:name=".view.activity.WebActivity"></activity>
     </application>
 
 </manifest>

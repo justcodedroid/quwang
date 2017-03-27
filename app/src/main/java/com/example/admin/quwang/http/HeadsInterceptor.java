@@ -21,11 +21,6 @@ public class HeadsInterceptor implements Interceptor {
                 .addHeader("sign", " e36db3569ac77938ea700ed315817ec0").
                         addHeader("App-Agent"," version=3.2.0,platform=android,app_store_name=zapp-wandoujia,software_version=6.0,models=Custom Phone - 6.0.0 - API 23 - 768x1280,package_name=com.weishang.qwapp,time=1489484134207")
                 .addHeader("User-Agent","okhttp/3.4.1").build();
-        Set<String> names = request.headers().names();
-        for (String name:names
-             ) {
-            Log.e("tag",name+"-----<"+request.header(name));
-        }
         return chain.proceed(request);
     }
 }
