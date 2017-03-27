@@ -3,10 +3,15 @@
  >
     <data>
         <variable
+            name="click"
+            type="com.example.admin.quwang.callback.ShangPinClickListener"></variable>
+        <variable
             name="shangpin"
             type="com.example.admin.quwang.bean.ShangPinBean"></variable>
     </data>
     <LinearLayout
+        android:onClick="@{()->click.onItemClick(shangpin)}"
+        android:background="#fff"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="300dp">

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.admin.quwang.bean.OtherRecommendListBean;
+import com.example.admin.quwang.callback.OtherRecommendClickListener;
 import com.example.admin.quwang.databinding.ItemOtherRecommandBinding;
 
 import java.util.ArrayList;
@@ -15,11 +16,12 @@ import java.util.List;
  */
 
 public class SuperListViewUtils {
-    public static List<View> convertOtherRecommandViews(List<OtherRecommendListBean> listBeanList, Context context){
-        List<View> list=new ArrayList<>();
-        LayoutInflater inflater=LayoutInflater.from(context);
+    public static List<View> convertOtherRecommandViews(List<OtherRecommendListBean> listBeanList, Context context) {
+        List<View> list = new ArrayList<>();
+        LayoutInflater inflater = LayoutInflater.from(context);
         for (int i = 0; i < listBeanList.size(); i++) {
             ItemOtherRecommandBinding inflate = ItemOtherRecommandBinding.inflate(inflater);
+            inflate.setClick(new OtherRecommendClickListener(context));
             inflate.setRecommandbean(listBeanList.get(i));
             list.add(inflate.getRoot());
         }

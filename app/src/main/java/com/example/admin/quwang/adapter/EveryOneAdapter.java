@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.admin.quwang.bean.EveryOneBuyBean;
+import com.example.admin.quwang.callback.EveryOneBuyClickListener;
 import com.example.admin.quwang.databinding.ItemSpanOneBinding;
 import com.example.admin.quwang.databinding.ItemSpanTwoBinding;
 
@@ -60,9 +61,12 @@ public class EveryOneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         int itemViewType = getItemViewType(position);
         if (itemViewType == spantwo) {
             TwoHodler hodler = (TwoHodler) holder;
+            hodler.binding.setClick(new EveryOneBuyClickListener(ctx));
             hodler.bind(list.get(position));
+
         } else {
             OneHodler hodler = (OneHodler) holder;
+            hodler.binding.setClick(new EveryOneBuyClickListener(ctx));
             hodler.bind(list.get(position));
         }
     }

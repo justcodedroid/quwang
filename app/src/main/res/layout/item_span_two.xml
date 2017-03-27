@@ -3,10 +3,14 @@
    >
 <data>
     <variable
+        name="click"
+        type="com.example.admin.quwang.callback.EveryOneBuyClickListener"></variable>
+    <variable
         name="everyone"
         type="com.example.admin.quwang.bean.EveryOneBuyBean"></variable>
 </data>
     <LinearLayout
+        android:onClick="@{()->click.onItemClick(everyone)}"
         android:layout_margin="1px"
         android:background="#fff"
         android:gravity="center_vertical"

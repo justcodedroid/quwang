@@ -23,7 +23,7 @@ public class ShangPinBean {
     private int special_id;
     private int special_price;
     private int spwcial_type;
-    private int start;
+    private String start;
     private int total_comment;
     private int user_number;
 
@@ -171,11 +171,11 @@ public class ShangPinBean {
         this.spwcial_type = spwcial_type;
     }
 
-    public int getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public void setStart(String start) {
         this.start = start;
     }
 

@@ -4,7 +4,9 @@
     <data>
 
         <import type="com.example.admin.quwang.bean.AdListBean"></import>
-
+        <variable
+            name="click"
+            type="com.example.admin.quwang.callback.OtherRecommendClickListener"></variable>
         <variable
             name="recommandbean"
             type="com.example.admin.quwang.bean.OtherRecommendListBean"></variable>
@@ -15,11 +17,9 @@
        android:paddingTop="10dp"
        android:layout_width="match_parent"
        android:layout_height="660dp">
-
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="650dp"
-
            android:background="#fff"
            android:orientation="vertical">
 
@@ -35,6 +35,7 @@
                    android:textSize="18sp" />
 
                <ImageView
+                   android:onClick="@{()->click.onMoreClick(recommandbean)}"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_alignParentRight="true"
@@ -46,6 +47,7 @@
            <ImageView
                android:layout_width="match_parent"
                android:layout_height="220dp"
+               android:onClick="@{()->click.onItemClick(recommandbean.ad_list[0])}"
                android:src="@{((AdListBean)recommandbean.ad_list[0]).img_url}" />
 
            <LinearLayout
@@ -54,6 +56,7 @@
                android:orientation="horizontal">
 
                <LinearLayout
+                   android:onClick="@{()->click.onItemClick(recommandbean.ad_list[1])}"
                    android:layout_width="0dp"
                    android:layout_height="350dp"
                    android:layout_weight="2"
@@ -93,6 +96,7 @@
                    android:layout_weight="3">
 
                    <RelativeLayout
+                       android:onClick="@{()->click.onItemClick(recommandbean.ad_list[2])}"
                        android:layout_width="match_parent"
                        android:layout_height="175dp">
 
@@ -135,7 +139,6 @@
                            android:layout_toRightOf="@id/desc_tv_2"
                            android:src="@{((AdListBean)recommandbean.ad_list[2]).img_url}" />
                    </RelativeLayout>
-
                    <View
                        android:layout_width="match_parent"
                        android:layout_height="1dp"
@@ -146,6 +149,7 @@
                        android:layout_height="174dp"
                        android:orientation="horizontal">
                        <LinearLayout
+                           android:onClick="@{()->click.onItemClick(recommandbean.ad_list[3])}"
                            android:gravity="center_horizontal"
                            android:orientation="vertical"
                            android:layout_weight="1"
@@ -179,6 +183,7 @@
                            android:layout_width="1dp"
                            android:layout_height="match_parent"></View>
                        <LinearLayout
+                           android:onClick="@{()->click.onItemClick(recommandbean.ad_list[4])}"
                            android:layout_gravity="center_horizontal"
                            android:orientation="vertical"
                            android:layout_weight="1"

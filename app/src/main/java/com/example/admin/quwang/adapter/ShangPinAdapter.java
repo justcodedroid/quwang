@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 
 import com.example.admin.quwang.bean.PromotionListBean;
 import com.example.admin.quwang.bean.ShangPinBean;
+import com.example.admin.quwang.callback.ShangPinClickListener;
 import com.example.admin.quwang.databinding.ItemShanpinBinding;
 
 import java.util.List;
@@ -50,10 +51,11 @@ public class ShangPinAdapter extends BaseAdapter {
             hodler=new Hodler();
             hodler.binding=inflate;
             convertView=inflate.getRoot();
-            convertView.setTag(inflate);
+            convertView.setTag(hodler);
         }
         hodler= (Hodler) convertView.getTag();
         hodler.binding.setShangpin(list.get(position));
+        hodler.binding.setClick(new ShangPinClickListener(context));
         hodler.binding.executePendingBindings();
         return convertView;
     }

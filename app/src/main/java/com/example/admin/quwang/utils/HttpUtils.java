@@ -74,7 +74,7 @@ public class HttpUtils {
             @Override
             public void onFailure(Call<ShouYeBean> call, Throwable t) {
             listenr.onError(t.getMessage(),HttpModel.APIERROR);
-            Log.e("sdas",t.getMessage());
+           t.printStackTrace();
             }
         });
     }

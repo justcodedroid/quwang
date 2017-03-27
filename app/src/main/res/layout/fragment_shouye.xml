@@ -120,6 +120,7 @@
                     android:text="-------------必败单品--------------"
                     android:textSize="18sp" />
                 <com.example.admin.quwang.view.extend.SuperGridView
+                    android:numColumns="2"
                     android:id="@+id/recommandGv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"></com.example.admin.quwang.view.extend.SuperGridView>
