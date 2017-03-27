@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">quwang</string>
+    <string name="price">￥</string>
+    <string name="xiaoliang">销量</string>
+</resources>

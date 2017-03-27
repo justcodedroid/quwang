@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_centerInParent="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/net_error_iv"
+        android:src="@mipmap/netbreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@id/net_error_iv"
+        android:textSize="18sp"
+        android:id="@+id/title_tv"
+        android:layout_centerHorizontal="true"
+        android:textColor="#4f4f4f"
+        android:layout_marginTop="10dp"
+        android:text="网络已经断开或不稳定"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+ <TextView
+     android:layout_centerHorizontal="true"
+        android:layout_below="@id/title_tv"
+        android:textSize="18sp"
+        android:id="@+id/desc_tv"
+        android:textColor="#afafaf"
+        android:layout_marginTop="10dp"
+        android:text="您可以点击刷新按钮，再次加载"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/retry_btn"
+        android:background="@drawable/selector_retry"
+        android:layout_marginTop="20dp"
+        android:textColor="#fff"
+        android:text="刷新界面"
+        android:layout_below="@id/desc_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="60dp" />
+</RelativeLayout>
+</RelativeLayout>

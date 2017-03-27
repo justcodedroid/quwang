@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.admin.quwang.bean.AdListBean"></import>
+
+        <variable
+            name="recommandbean"
+            type="com.example.admin.quwang.bean.OtherRecommendListBean"></variable>
+    </data>
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:paddingTop="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="660dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="650dp"
+
+           android:background="#fff"
+           android:orientation="vertical">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="80dp">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerInParent="true"
+                   android:text="@{recommandbean.main_title}"
+                   android:textSize="18sp" />
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="10dp"
+                   android:src="@drawable/top_more" />
+           </RelativeLayout>
+
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="220dp"
+               android:src="@{((AdListBean)recommandbean.ad_list[0]).img_url}" />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="350dp"
+               android:orientation="horizontal">
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="350dp"
+                   android:layout_weight="2"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:text="@{((AdListBean)recommandbean.ad_list[1]).main_title}"
+                       android:textColor="#666"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:text="@{((AdListBean)recommandbean.ad_list[1]).subtitle}"
+                       android:textColor="#ccc"
+                       android:textSize="16sp" />
+
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="300dp"
+                       android:src="@{((AdListBean)recommandbean.ad_list[1]).img_url}" />
+               </LinearLayout>
+
+               <View
+                   android:layout_width="1dp"
+                   android:layout_height="match_parent"
+                   android:background="#ccc"></View>
+
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="0dp"
+                   android:layout_height="350dp"
+                   android:layout_weight="3">
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="175dp">
+
+                       <TextView
+                           android:id="@+id/title_tv_2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="10dp"
+                           android:layout_marginTop="10dp"
+                           android:layout_marginLeft="10dp"
+                           android:text="@{((AdListBean)recommandbean.ad_list[2]).main_title}"
+                           android:textColor="#666"
+                           android:textSize="16sp" />
+
+                       <TextView
+                           android:id="@+id/desc_tv_2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/title_tv_2"
+                           android:layout_marginLeft="10dp"
+                           android:layout_marginTop="10dp"
+                           android:layout_marginBottom="10dp"
+                           android:text="@{((AdListBean)recommandbean.ad_list[2]).subtitle}"
+                           android:textColor="#ccc"
+                           android:textSize="14sp" />
+
+                       <TextView
+                           android:id="@+id/price_tv_2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/desc_tv_2"
+                           android:layout_marginLeft="10dp"
+                           android:text="@{@string/price+((AdListBean)recommandbean.ad_list[2]).goods_price}"
+                           android:textColor="#ccc"
+                           android:textSize="16sp" />
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:layout_toRightOf="@id/desc_tv_2"
+                           android:src="@{((AdListBean)recommandbean.ad_list[2]).img_url}" />
+                   </RelativeLayout>
+
+                   <View
+                       android:layout_width="match_parent"
+                       android:layout_height="1dp"
+                       android:background="#ccc"></View>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="174dp"
+                       android:orientation="horizontal">
+                       <LinearLayout
+                           android:gravity="center_horizontal"
+                           android:orientation="vertical"
+                           android:layout_weight="1"
+                           android:layout_width="0dp"
+                           android:layout_height="match_parent">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="10dp"
+                               android:text="@{((AdListBean)recommandbean.ad_list[3]).main_title}"
+                               android:textColor="#666"
+                               android:textSize="16sp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="10dp"
+                               android:text="@{((AdListBean)recommandbean.ad_list[3]).subtitle}"
+                               android:textColor="#ccc"
+                               android:textSize="16sp" />
+
+                           <ImageView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:src="@{((AdListBean)recommandbean.ad_list[3]).img_url}" />
+
+                       </LinearLayout>
+                       <View
+                           android:background="#ccc"
+                           android:layout_width="1dp"
+                           android:layout_height="match_parent"></View>
+                       <LinearLayout
+                           android:layout_gravity="center_horizontal"
+                           android:orientation="vertical"
+                           android:layout_weight="1"
+                           android:layout_width="0dp"
+                           android:layout_height="match_parent">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="10dp"
+                               android:text="@{((AdListBean)recommandbean.ad_list[4]).main_title}"
+                               android:textColor="#666"
+                               android:textSize="16sp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="10dp"
+                               android:text="@{((AdListBean)recommandbean.ad_list[4]).subtitle}"
+                               android:textColor="#ccc"
+                               android:textSize="16sp" />
+
+                           <ImageView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:src="@{((AdListBean)recommandbean.ad_list[4]).img_url}" />
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+               </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+   </LinearLayout>
+
+</layout>

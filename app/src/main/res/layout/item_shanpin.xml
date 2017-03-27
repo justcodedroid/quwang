@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+ >
+    <data>
+        <variable
+            name="shangpin"
+            type="com.example.admin.quwang.bean.ShangPinBean"></variable>
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <ImageView
+            android:src="@{shangpin.img_url}"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <TextView
+            android:padding="3dp"
+            android:textColor="#333"
+            android:lines="2"
+            android:text="@{shangpin.goods_name}"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="3dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_weight="1"
+                android:text="@{@string/price+shangpin.app_pirce}"
+                android:layout_width="0dp"
+                android:textColor="#e53437"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="#ccc"
+                android:text="@{@string/xiaoliang+shangpin.sold_num}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

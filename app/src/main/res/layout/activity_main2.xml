@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/navigation_menu"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff">
+
+            <RadioGroup
+                android:id="@+id/navigation_menu_rg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/shouye"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableTop="@drawable/selector_shouye"
+                    android:gravity="center"
+                    android:text="首页"
+                    android:textColor="@color/selector_navigation_bottom_menu" />
+
+                <RadioButton
+                    android:id="@+id/faxian"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_faxian"
+                    android:gravity="center"
+                    android:text="发现"
+                    android:textColor="@color/selector_navigation_bottom_menu" />
+
+                <RadioButton
+                    android:id="@+id/gouwuche"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_gouwuche"
+                    android:gravity="center"
+                    android:text="购物车"
+                    android:textColor="@color/selector_navigation_bottom_menu" />
+
+                <RadioButton
+                    android:id="@+id/wode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_wode"
+                    android:gravity="center"
+                    android:text="我的"
+                    android:textColor="@color/selector_navigation_bottom_menu" />
+            </RadioGroup>
+        </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/fragment_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/navigation_menu"
+            android:background="#f5f5f5"></FrameLayout>
+    </RelativeLayout>
+</layout>

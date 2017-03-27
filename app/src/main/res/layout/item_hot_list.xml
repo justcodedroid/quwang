@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+    <data>
+        <variable
+            name="hotlist"
+            type="com.example.admin.quwang.bean.HotListBean"></variable>
+    </data>
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:padding="5dp"
+        android:layout_height="120dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@{hotlist.img_url}"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+        <TextView
+            android:textColor="#ccc"
+            android:layout_marginTop="5dp"
+            android:text="@{hotlist.main_title}"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp" />
+    </LinearLayout>
+
+</layout>

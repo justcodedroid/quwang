@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+<data>
+    <import type="android.view.View"></import>
+    <variable
+        name="welcomebean"
+        type="com.example.admin.quwang.bean.WelcomeBean.DataBean.StartAdsListBean"
+        ></variable>
+</data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+           <ImageView
+            android:src="@{welcomebean.img_url}"
+            android:id="@+id/welcomeIv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/skipTv"
+            android:onClick="toMain"
+            android:text="跳过\n3s"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:visibility="@{welcomebean==null?View.GONE:View.VISIBLE}"
+            android:background="@drawable/shape_circle_gray"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
+
+</layout>
