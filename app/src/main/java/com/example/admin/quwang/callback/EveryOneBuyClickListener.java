@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.admin.quwang.bean.EveryOneBuyBean;
+import com.example.admin.quwang.http.HttpModel;
+import com.example.admin.quwang.utils.ActivityRouter;
 
 /**
  * Created by admin on 2017/3/27.
@@ -16,6 +18,6 @@ public class EveryOneBuyClickListener {
         this.ctx = ctx;
     }
     public void onItemClick(EveryOneBuyBean buyBean){
-        Toast.makeText(ctx, ""+buyBean.getMain_title(), Toast.LENGTH_SHORT).show();
+        ActivityRouter.router(ctx,buyBean.getType(),buyBean.getLink_url());
     }
 }

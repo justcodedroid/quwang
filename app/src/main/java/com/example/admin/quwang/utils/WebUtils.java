@@ -13,11 +13,11 @@ import com.example.admin.quwang.view.activity.WebActivity;
  */
 
 public class WebUtils {
-    public static void startWebActivity(Context context,String link_url,String title){
+    public static void startWebActivity(Context context,String link_url){
         Intent intent=new Intent(context, WebActivity.class);
         WebBean webBean = new WebBean();
         webBean.setLinkurl(link_url);
-        webBean.setTitle(title);
+        webBean.setTitle("");
         intent.putExtra("webbean",webBean);
        context.startActivity(intent);
     }

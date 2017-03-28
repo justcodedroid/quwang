@@ -23,13 +23,16 @@ import com.example.admin.quwang.bean.WebBean;
 import com.example.admin.quwang.databinding.FragmentShouyeBinding;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.presenter.ShouYePresenter;
+import com.example.admin.quwang.utils.ActivityRouter;
 import com.example.admin.quwang.utils.BannerUtils;
 import com.example.admin.quwang.utils.FliperUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
+import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
 import com.example.admin.quwang.utils.SuperListViewUtils;
 import com.example.admin.quwang.utils.WebUtils;
 import com.example.admin.quwang.view.ShouYeView;
 import com.example.admin.quwang.view.activity.DetatilsActivity;
+import com.example.admin.quwang.view.activity.ShangPinXiangQingActivity;
 import com.example.admin.quwang.view.activity.WebActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.HorizontalListView;
@@ -51,6 +54,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private List<HotDailyBean> hotDailyList;
     private List<HotListBean> hotListBeanList;
+    private List<PromotionListBean> promotionListBeanList;
 
     @Override
     protected int getLayoutId() {
@@ -109,7 +113,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
 
     @Override
     public void relashPromotionList(List<PromotionListBean> promotionListBeanList) {
-
+        this.promotionListBeanList = promotionListBeanList;
         List<View> list = HorizontalListViewUtils.convertPromotionList(promotionListBeanList, a);
         bind.promotionListView.setAdapter(new HorizontalListView.SimpleHorizontalAdapter(list));
     }
@@ -148,9 +152,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     @Override
     public void onItemClick(Banner banner, View itemView, int position) {
         TopAdsBean topAdsBean = bannersList.get(position);
-        if (topAdsBean.getType() == HttpModel.TYPEWEB) {
-            WebUtils.startWebActivity(a, topAdsBean.getLink_url(), topAdsBean.getMain_title());
-        }
+        ActivityRouter.router(a, topAdsBean.getType(), topAdsBean.getLink_url());
     }
 
 
@@ -159,20 +161,25 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
         if (horizontalScrollView == bind.hotListView) {
             handleHotListItemClick(position);
         }
+        if (horizontalScrollView == bind.promotionListView) {
+            handlePromotionItemClick(position);
+        }
+    }
+
+    private void handlePromotionItemClick(int position) {
+        int goods_id = promotionListBeanList.get(position).getGoods_id();
+        ShangPinXiangQingUtils.startShangPingXiangQingActivity(a, goods_id);
     }
 
     private void handleHotListItemClick(int position) {
         HotListBean hotListBean = hotListBeanList.get(position);
-        if (hotListBean.getType() == HttpModel.TYPEWEB) {
-            if (hotListBean.getLink_url().equals("qdyl")) {
-                toast("个人中心fragnnt 签到");
-            } else {
-                WebUtils.startWebActivity(a, hotListBean.getLink_url(), hotListBean.getMain_title());
-            }
+        if (hotListBean.getLink_url().equals("qdyl")) {
+            toast("个人中心fragnnt 签到");
+        } else {
+            ActivityRouter.router(a, hotListBean.getType(), hotListBean.getLink_url());
         }
-        if (hotListBean.getType() == HttpModel.TYPEOTHERWEB) {
-            WebUtils.startOtherWebActivity(a, hotListBean.getLink_url());
-        }
+
+
     }
 
     @Override

@@ -26,7 +26,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".view.activity.DetatilsActivity" />
         <activity android:name=".view.activity.TuPianYuLanActivity" />
-        <activity android:name=".view.activity.WebActivity"></activity>
+        <activity android:name=".view.activity.WebActivity" />
+        <activity android:name=".view.activity.ShangPinXiangQingActivity"></activity>
     </application>
 
 </manifest>

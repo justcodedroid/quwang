@@ -5,10 +5,10 @@ package com.example.admin.quwang.bean;
  */
 
 public class ShangPinBean {
-    private float app_pirce;
+    private float app_price;
     private int difference;
     private float discount;
-    private int goods_atr;
+    private int goods_attr;
     private String goods_attr_text;
     private int goods_id;
     private String goods_name;
@@ -27,12 +27,12 @@ public class ShangPinBean {
     private int total_comment;
     private int user_number;
 
-    public float getApp_pirce() {
-        return app_pirce;
+    public float getApp_price() {
+        return app_price;
     }
 
-    public void setApp_pirce(float app_pirce) {
-        this.app_pirce = app_pirce;
+    public void setApp_price(float app_pirce) {
+        this.app_price = app_pirce;
     }
 
     public int getDifference() {
@@ -51,12 +51,12 @@ public class ShangPinBean {
         this.discount = discount;
     }
 
-    public int getGoods_atr() {
-        return goods_atr;
+    public int getGoods_attr() {
+        return goods_attr;
     }
 
-    public void setGoods_atr(int goods_atr) {
-        this.goods_atr = goods_atr;
+    public void setGoods_atrt(int goods_atr) {
+        this.goods_attr = goods_atr;
     }
 
     public String getGoods_attr_text() {

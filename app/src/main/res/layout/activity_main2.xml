@@ -19,7 +19,7 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <RadioButton
+                <com.example.admin.quwang.view.extend.RedRadioButton
                     android:id="@+id/shouye"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                     android:text="首页"
                     android:textColor="@color/selector_navigation_bottom_menu" />
 
-                <RadioButton
+                <com.example.admin.quwang.view.extend.RedRadioButton
                     android:id="@+id/faxian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -42,8 +42,10 @@
                     android:text="发现"
                     android:textColor="@color/selector_navigation_bottom_menu" />
 
-                <RadioButton
+                <com.example.admin.quwang.view.extend.RedRadioButton
                     android:id="@+id/gouwuche"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:count="10"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -53,7 +55,7 @@
                     android:text="购物车"
                     android:textColor="@color/selector_navigation_bottom_menu" />
 
-                <RadioButton
+                <com.example.admin.quwang.view.extend.RedRadioButton
                     android:id="@+id/wode"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

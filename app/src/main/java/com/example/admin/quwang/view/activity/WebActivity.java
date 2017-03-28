@@ -15,13 +15,14 @@ import com.example.admin.quwang.bean.WebResultBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.databinding.ActivityWebBinding;
 import com.example.admin.quwang.presenter.WebPresenter;
+import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
 import com.example.admin.quwang.view.WebView;
 
 public class WebActivity extends BaseActivity<ActivityWebBinding> implements WebView {
 
     private WebBean webBean;
     private WebPresenter webPresenter;
-    private WebChromeClient webChromeClient= new WebChromeClient() {
+    private WebChromeClient webChromeClient = new WebChromeClient() {
         @Override
         public void onProgressChanged(android.webkit.WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
@@ -40,6 +41,7 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
             bind.setTitle(title);
         }
     };
+
     @Override
     protected void initImpl() {
         init();
@@ -60,7 +62,7 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
 
     private void initwebview() {
         bind.wv.getSettings().setJavaScriptEnabled(true);
-        bind.wv.addJavascriptInterface(new Android(),"zt");
+        bind.wv.addJavascriptInterface(new Android(), "zt");
         bind.wv.setWebViewClient(new WebViewClient());
         bind.wv.setWebChromeClient(webChromeClient);
     }
@@ -79,19 +81,22 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
 
     private class Android {
         @JavascriptInterface
-        public void clickOnTopic(int goodsid,int speical_type,int specialId,int goods_attr){
-            Toast.makeText(WebActivity.this, "goods_id"+goodsid, Toast.LENGTH_SHORT).show();
+        public void clickOnTopic(int goodsid, int speical_type, int specialId, int goods_attr) {
+            ShangPinXiangQingUtils.startShangPingXiangQingActivity(WebActivity.this, goodsid);
         }
+
         @JavascriptInterface
-        public void clickOnLogin(){
+        public void clickOnLogin() {
             Toast.makeText(WebActivity.this, "登陆", Toast.LENGTH_SHORT).show();
         }
+
         @JavascriptInterface
-        public void clickOnCart(){
+        public void clickOnCart() {
             Toast.makeText(WebActivity.this, "购物车", Toast.LENGTH_SHORT).show();
         }
+
         @JavascriptInterface
-        public void clickOnBonus(){
+        public void clickOnBonus() {
             Toast.makeText(WebActivity.this, "查看优惠卷", Toast.LENGTH_SHORT).show();
         }
     }

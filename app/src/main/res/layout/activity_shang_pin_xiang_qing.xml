@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:onClick="finish"
+                android:src="@mipmap/iv_return" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TabLayout
+                    android:layout_marginLeft="45dp"
+                    android:id="@+id/tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:tabGravity="center"
+                    app:tabIndicatorColor="#dd2929"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="#dd2929"
+                    app:tabTextColor="#ccc"></android.support.design.widget.TabLayout>
+            </FrameLayout>
+
+            <com.example.admin.quwang.view.extend.RedRadioButton xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+                android:layout_marginRight="10dp"
+                android:button="@null"
+                android:drawableTop="@mipmap/desktop_shopcar"
+                app:count="10" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/top_more" />
+
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#eee"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:button="@null"
+                android:drawableTop="@mipmap/details_kefu"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="客服" />
+
+            <RadioButton
+                android:layout_marginLeft="1dp"
+                android:enabled="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_shoucang"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="收藏" />
+            <Button
+                android:text="加入购物车"
+                android:layout_weight="3"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:background="#ffaf34"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        <Button
+                android:text="立即购买"
+                android:layout_weight="3"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:background="#dd2929"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+      </LinearLayout>
+
+</layout>
