@@ -139,8 +139,15 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     }
 
     private void convertTopAdsToViews(List<TopAdsBean> top_ads) {
+        final int indectorCounts = top_ads.size();
+        BannerUtils.increateData(top_ads);
         List<View> views = BannerUtils.convert(top_ads, a);
-        setAdapter(new Banner.SimpleBannerAdapter(views));
+        setAdapter(new Banner.SimpleBannerAdapter(views) {
+            @Override
+            public int getIndectorCount() {
+                return indectorCounts;
+            }
+        });
     }
 
     @Override

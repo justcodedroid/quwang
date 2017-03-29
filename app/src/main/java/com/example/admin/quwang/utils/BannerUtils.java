@@ -8,6 +8,7 @@ import com.example.admin.quwang.bean.TopAdsBean;
 import com.example.admin.quwang.databinding.ItemBannerBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,5 +25,15 @@ public class BannerUtils {
             views.add(binding.getRoot());
         }
         return views;
+    }
+
+    public static void increateData(List list) {
+        if (list.size() == 1) {
+            list.addAll(list);
+            list.addAll(list);
+        }
+        if (list.size() == 2) {
+            list.addAll(list);
+        }
     }
 }

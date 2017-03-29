@@ -13,6 +13,7 @@ import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.WelcomeBean;
 import com.example.admin.quwang.databinding.ActivityMainBinding;
 import com.example.admin.quwang.presenter.WelcomePresenter;
+import com.example.admin.quwang.utils.ActivityRouter;
 import com.example.admin.quwang.view.WelcomeView;
 
 import java.util.Locale;
@@ -21,19 +22,20 @@ import it.xabaras.android.logger.Logger;
 
 public class WelComeActivity extends BaseActivity<ActivityMainBinding> implements WelcomeView {
     private WelcomePresenter presenter;
-    private  int leftTime=3;
-    Handler delayHandler=new Handler(){
+    private int leftTime = 3;
+    Handler delayHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(leftTime==0){
+            if (leftTime == 0) {
                 toMain(null);
-            }else {
-                bind.skipTv.setText("跳过\n"+leftTime+"s");
+            } else {
+                bind.skipTv.setText("跳过\n" + leftTime + "s");
                 leftTime--;
-                delayHandler.sendEmptyMessageDelayed(0,1000);
+                delayHandler.sendEmptyMessageDelayed(0, 1000);
             }
         }
     };
+
     @Override
     protected void initImpl() {
         setFullScreen();
@@ -50,7 +52,7 @@ public class WelComeActivity extends BaseActivity<ActivityMainBinding> implement
     @Override
     public void RelashData(WelcomeBean welcomeBean) {
         bind.setWelcomebean(welcomeBean.getData().getStart_ads_list());
-        delayHandler.sendEmptyMessageDelayed(0,1000);
+        delayHandler.sendEmptyMessageDelayed(0, 1000);
     }
 
     @Override
@@ -60,7 +62,7 @@ public class WelComeActivity extends BaseActivity<ActivityMainBinding> implement
 
     public void toMain(View v) {
         delayHandler.removeCallbacksAndMessages(null);
-        startACT(MainActivity.class.getName(),true);
+        startACT(MainActivity.class.getName(), true);
     }
 
     @Override
@@ -68,6 +70,19 @@ public class WelComeActivity extends BaseActivity<ActivityMainBinding> implement
 
         delayHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
+    }
+
+    public void toAds(View v) {
+        WelcomeBean.DataBean.StartAdsListBean welcomebean = bind.getWelcomebean();
+        try {
+            String type = welcomebean.getType();
+            int i = Integer.parseInt(type);
+            startActivity(new Intent(this, MainActivity.class));
+            ActivityRouter.router(this, i, welcomebean.getLink_url());
+            finish();
+        } catch (Exception e) {
+
+        }
     }
 
 }

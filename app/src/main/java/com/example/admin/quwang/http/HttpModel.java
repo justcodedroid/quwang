@@ -16,4 +16,10 @@ public class HttpModel {
     public static final int TYPESHANGPINGXIANGQING = 1;
     public static final int TYPEPINLEILIEBIAO = 9;
 
+    public static final int NOINITDATA = 2;// 下啦刷新没有数据
+    public static final int NOLOADDATA = 3;
+    public static final int RELASHSUCCESS = 4;
+    public static final int RELASHFAILED = 5;
+    public static final int LOADDATASUCCESS = 6;
+    public static final int LOADDATAFAILED = 7;
 }

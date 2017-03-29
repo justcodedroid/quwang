@@ -3,6 +3,8 @@ package com.example.admin.quwang.utils;
 import android.util.Log;
 
 import com.example.admin.quwang.bean.DetailsBean;
+import com.example.admin.quwang.bean.PingJiaBean;
+import com.example.admin.quwang.bean.PingJianResultBean;
 import com.example.admin.quwang.bean.ShouYeBean;
 import com.example.admin.quwang.bean.WebResultBean;
 import com.example.admin.quwang.bean.WelcomeBean;
@@ -10,11 +12,13 @@ import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
+import com.example.admin.quwang.http.PingJiaService;
 import com.example.admin.quwang.http.ShouYeService;
 import com.example.admin.quwang.http.WebService;
 import com.example.admin.quwang.http.WelcomeService;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -92,7 +96,6 @@ public class HttpUtils {
                 } else {
                     try {
                         String string = response.errorBody().string();
-
                         loadDataFinishListener.onError(string, response.code());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -108,16 +111,17 @@ public class HttpUtils {
             }
         });
     }
-    public static void loadWebResultBean(String topicId, final OnLoadFinishListenr<WebResultBean> onLoadFinishListenr){
+
+    public static void loadWebResultBean(String topicId, final OnLoadFinishListenr<WebResultBean> onLoadFinishListenr) {
         retrofit.create(WebService.class).getWebResultBean(topicId).enqueue(new Callback<WebResultBean>() {
             @Override
             public void onResponse(Call<WebResultBean> call, Response<WebResultBean> response) {
                 boolean successful = response.isSuccessful();
-                if(successful){
-                    onLoadFinishListenr.onSuccess(response.body(),HttpModel.NORMAL);
-                }else {
+                if (successful) {
+                    onLoadFinishListenr.onSuccess(response.body(), HttpModel.NORMAL);
+                } else {
                     try {
-                        onLoadFinishListenr.onError(response.errorBody().string(),response.code());
+                        onLoadFinishListenr.onError(response.errorBody().string(), response.code());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -126,8 +130,68 @@ public class HttpUtils {
 
             @Override
             public void onFailure(Call<WebResultBean> call, Throwable t) {
-                onLoadFinishListenr.onError(t.getMessage(),HttpModel.APIERROR);
+                onLoadFinishListenr.onError(t.getMessage(), HttpModel.APIERROR);
             }
         });
+    }
+
+    public static void loadPingJiaResultBean(int goods_id, final int page, final OnLoadFinishListenr<List<PingJiaBean>> loadFinishListenr) {
+        retrofit.create(PingJiaService.class).getPingJiaResultBean(goods_id, page).enqueue(new Callback<PingJianResultBean>() {
+            @Override
+            public void onResponse(Call<PingJianResultBean> call, Response<PingJianResultBean> response) {
+
+                if (response.isSuccessful()) {
+                    List<PingJiaBean> comment_list = response.body().getData().getComment_list();
+                    loadFinishListenr.onSuccess(comment_list, getNormalType(comment_list, page));
+                } else {
+                    try {
+                        loadFinishListenr.onError(response.errorBody().string(), response.code());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PingJianResultBean> call, Throwable t) {
+
+                loadFinishListenr.onError(t.getMessage(), getErrorType(page));
+            }
+        });
+    }
+
+    private static int getErrorType(int page) {
+        if (page == 1) {
+            return HttpModel.RELASHFAILED;
+        }
+        if (page > 1) {
+            return HttpModel.LOADDATAFAILED;
+        }
+        return HttpModel.APIERROR;
+    }
+
+    private static int getNormalType(List list, int page) {
+        boolean empry = isEmpry(list);
+
+        if (empry && page == 1) {
+            // 下来刷新就没有数据
+            return HttpModel.NOINITDATA;
+        }
+        if (empry && page > 1) {
+            // 没有更多数据
+            return HttpModel.NOLOADDATA;
+        }
+        if (!empry && page == 1) {
+            return HttpModel.RELASHSUCCESS;
+        }
+        if (!empry && page >= 1) {
+            return HttpModel.LOADDATASUCCESS;
+        }
+        return HttpModel.APIERROR;
+    }
+
+    private static boolean isEmpry(List list) {
+        return list == null || list.size() == 0;
     }
 }

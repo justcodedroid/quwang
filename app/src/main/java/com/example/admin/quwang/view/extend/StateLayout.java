@@ -44,28 +44,31 @@ public class StateLayout extends FrameLayout implements View.OnClickListener {
         loadingAnimation = (AnimationDrawable) loaddingView.getBackground();
 
     }
+
     @Override
     public void onClick(View v) {
-        if(retryListener!=null){
+        if (retryListener != null) {
             retryListener.onRetryClick();
         }
     }
-    public interface OnRetryClickListener{
+
+    public interface OnRetryClickListener {
         void onRetryClick();
     }
-    public void setOnRetryClickListener(OnRetryClickListener listener){
-        this.retryListener=listener;
+
+    public void setOnRetryClickListener(OnRetryClickListener listener) {
+        this.retryListener = listener;
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         int childCount = getChildCount();
-        if(childCount!=3){
+        if (childCount != 3) {
             throw new IllegalStateException("StateLayout只能有一个孩子");
         }
-        errorView=getChildAt(0);
-        loaddingView= (ImageView) getChildAt(1);
+        errorView = getChildAt(0);
+        loaddingView = (ImageView) getChildAt(1);
         normalView = getChildAt(2);
         init();
         initDefaultState();
@@ -75,19 +78,21 @@ public class StateLayout extends FrameLayout implements View.OnClickListener {
         switchToNormal();
     }
 
-    public void switchToNormal(){
+    public void switchToNormal() {
         normalView.setVisibility(VISIBLE);
         loadingAnimation.stop();
         loaddingView.setVisibility(GONE);
         errorView.setVisibility(GONE);
     }
-    public void switchToError(){
+
+    public void switchToError() {
         errorView.setVisibility(VISIBLE);
         loadingAnimation.stop();
         loaddingView.setVisibility(GONE);
         normalView.setVisibility(GONE);
     }
-    public void swicthToLoading(){
+
+    public void swicthToLoading() {
         loaddingView.setVisibility(VISIBLE);
         loadingAnimation.start();
         errorView.setVisibility(GONE);

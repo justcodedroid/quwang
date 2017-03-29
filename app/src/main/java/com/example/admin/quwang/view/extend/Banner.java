@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.example.admin.quwang.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,15 +29,15 @@ import java.util.List;
  */
 
 public class Banner extends RelativeLayout implements View.OnClickListener, ViewPager.OnPageChangeListener {
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            int currentItem = pager.getCurrentItem()+1;
-            if(currentItem>=bannerAdapter.getCount()){
-                currentItem=0;
+            int currentItem = pager.getCurrentItem() + 1;
+            if (currentItem >= bannerAdapter.getCount()) {
+                currentItem = 0;
             }
             pager.setCurrentItem(currentItem);
-            handler.sendEmptyMessageDelayed(0,2500);
+            handler.sendEmptyMessageDelayed(0, 2500);
         }
     };
     private ViewPager pager;
@@ -50,31 +51,34 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
         super(context);
         init();
     }
-    public void startLoop(){
+
+    public void startLoop() {
         isLoop = true;
-        handler.sendEmptyMessageDelayed(0,2500);
+        handler.sendEmptyMessageDelayed(0, 2500);
     }
-    public void stopLoop(){
-        isLoop=false;
+
+    public void stopLoop() {
+        isLoop = false;
         handler.removeCallbacksAndMessages(null);
     }
-    public boolean isLoop(){
+
+    public boolean isLoop() {
         return isLoop;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-       if(isLoop){
-           handler.removeCallbacksAndMessages(null);
-       }
+        if (isLoop) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if(isLoop){
-            handler.sendEmptyMessageDelayed(0,2500);
+        if (isLoop) {
+            handler.sendEmptyMessageDelayed(0, 2500);
         }
     }
 
@@ -91,7 +95,6 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
     private void init() {
         pager = new ViewPager(getContext());
         addView(pager);
-
         indectorGroups = new LinearLayout(getContext());
         indectorGroups.setOrientation(LinearLayout.HORIZONTAL);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -164,6 +167,7 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
                 break;
             }
         }
+        position %= bannerAdapter.getIndectorCount();
         return position;
     }
 
@@ -174,26 +178,28 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
 
     @Override
     public void onPageSelected(int position) {
+        if (bannerAdapter.getIndectorCount() == 1 || bannerAdapter.getIndectorCount() == 0) return;
         setCurrentIndector(position);
     }
 
     private void setCurrentIndector(int position) {
-        position%=bannerAdapter.getData().size();
+
+        position %= bannerAdapter.getIndectorCount();
         for (int i = 0; i < indectorGroups.getChildCount(); i++) {
-            indectorGroups.getChildAt(i).setSelected(i==position);
+            indectorGroups.getChildAt(i).setSelected(i == position);
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        if(isLoop()){
-            if(state==ViewPager.SCROLL_STATE_DRAGGING){
+        if (isLoop()) {
+            if (state == ViewPager.SCROLL_STATE_DRAGGING) {
                 isStop = true;
                 handler.removeCallbacksAndMessages(null);
             }
-            if(state==ViewPager.SCROLL_STATE_IDLE&&isStop){
-                isStop=false;
-                handler.sendEmptyMessageDelayed(0,2500);
+            if (state == ViewPager.SCROLL_STATE_IDLE && isStop) {
+                isStop = false;
+                handler.sendEmptyMessageDelayed(0, 2500);
             }
         }
     }
@@ -209,7 +215,8 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
 
     private void initIndectors() {
         indectorGroups.removeAllViews();
-        for (int i = 0; i < bannerAdapter.getData().size(); i++) {
+        if (bannerAdapter.getIndectorCount() == 1 || bannerAdapter.getIndectorCount() == 0) return;
+        for (int i = 0; i < bannerAdapter.getIndectorCount(); i++) {
             View dot = getDot();
             indectorGroups.addView(dot);
         }
@@ -222,6 +229,15 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
 
         public abstract List<View> getData();
 
+        public abstract int getIndectorCount();
+
+        protected List<View> list = new ArrayList<>();
+
+        public BannerAdapter(List<View> list) {
+            // 暂时知识支持 3个轮播
+            this.list = list;
+        }
+
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
@@ -229,24 +245,25 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            if (getData().size() == 0) return null;
-            View view = getData().get(position % getData().size());
+            if (list.size() == 0) return null;
+            View view = list.get(position % list.size());
             container.addView(view);
             return view;
         }
+
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
     }
-    public static class SimpleBannerAdapter extends BannerAdapter{
-        private final List<View> list;
 
-        public SimpleBannerAdapter (List<View> list){
-            // 暂时知识支持 3个轮播
-            this.list=list;
+    public abstract static class SimpleBannerAdapter extends BannerAdapter {
+
+        public SimpleBannerAdapter(List<View> list) {
+            super(list);
         }
+
         @Override
         public int getCount() {
             return Integer.MAX_VALUE;
@@ -256,6 +273,14 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
         public List<View> getData() {
             return list;
         }
+
+        /**
+         * indector的个数
+         *
+         * @return
+         */
+        @Override
+        public abstract int getIndectorCount();
     }
 
 }
