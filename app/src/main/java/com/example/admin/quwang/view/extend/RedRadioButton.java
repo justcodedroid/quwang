@@ -38,7 +38,7 @@ public class RedRadioButton extends RadioButton {
 
         textPaint = new TextPaint();
         textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(10);
+//        textPaint.setTextSize(10);
         textPaint.setStrokeWidth(2);
         textPaint.setAntiAlias(true);
         textPaint.setDither(true);

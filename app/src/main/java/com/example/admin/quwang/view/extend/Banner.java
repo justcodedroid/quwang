@@ -113,6 +113,7 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
         params.rightMargin = dp2px(10);
         view.setLayoutParams(params);
         view.setBackgroundDrawable(getSelectorDrawable());
+
         return view;
     }
 

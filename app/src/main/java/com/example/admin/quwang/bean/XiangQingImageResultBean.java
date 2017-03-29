@@ -68,11 +68,11 @@ public class XiangQingImageResultBean {
             this.img_height = img_height;
         }
 
-        public int getImg_width() {
+        public int getImg_with() {
             return img_with;
         }
 
-        public void setImg_width(int img_width) {
+        public void setImg_with(int img_width) {
             this.img_with = img_width;
         }
 

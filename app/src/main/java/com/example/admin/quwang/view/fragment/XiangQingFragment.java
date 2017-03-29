@@ -2,6 +2,7 @@ package com.example.admin.quwang.view.fragment;
 
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.adapter.XiangQingImageAdapter;
 import com.example.admin.quwang.adapter.XiangQingZheDieAdapter;
@@ -41,6 +42,11 @@ public class XiangQingFragment extends BaseFragment<FragmentXiangQingBinding> im
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
     public void relashParameterBeans(List<XiangQingResultBean.DataBean.ParameterBean> list) {
         XiangQingZheDieAdapter xiangQingZheDieAdapter = new XiangQingZheDieAdapter(a);
         xiangQingZheDieAdapter.relash(list);
@@ -49,7 +55,6 @@ public class XiangQingFragment extends BaseFragment<FragmentXiangQingBinding> im
 
     @Override
     public void relashImageBeans(XiangQingImageResultBean.DataBean dataBeen) {
-        Log.e("tag","tupianshuaixn");
         XiangQingImageAdapter adapter=new XiangQingImageAdapter(a);
         adapter.relash(dataBeen.getUrl_list());
         Log.e("tag",dataBeen.getUrl_list().size()+"------url");

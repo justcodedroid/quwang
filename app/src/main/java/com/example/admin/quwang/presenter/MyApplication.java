@@ -14,6 +14,5 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Glide.setup(new GlideBuilder(this).setDecodeFormat(DecodeFormat.PREFER_ARGB_8888));
     }
 }

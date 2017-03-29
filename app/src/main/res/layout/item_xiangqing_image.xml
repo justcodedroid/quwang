@@ -2,17 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
    >
 <data>
-    <variable
-        name="img"
-        type="com.example.admin.quwang.bean.XiangQingImageResultBean.ImageBean"></variable>
-</data>
+  </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:src="@{img.img_url}"
+            android:id="@+id/iv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

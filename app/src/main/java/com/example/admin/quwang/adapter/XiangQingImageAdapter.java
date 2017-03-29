@@ -9,6 +9,10 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.XiangQingImageResultBean;
 import com.example.admin.quwang.databinding.ItemXiangqingImageBinding;
 
@@ -59,11 +63,13 @@ public class XiangQingImageAdapter extends BaseAdapter {
             convertView = inflate.getRoot();
             hodler = new ImageHodler(inflate);
             convertView.setTag(hodler);
+            // 防止过度获取图片  出现oom
+            hodler.bind(list.get(position));
         } else {
             hodler = (ImageHodler) convertView.getTag();
         }
 
-        hodler.bind(list.get(position));
+
         return convertView;
     }
 
@@ -75,11 +81,10 @@ public class XiangQingImageAdapter extends BaseAdapter {
         }
 
         public void bind(XiangQingImageResultBean.ImageBean imageBean) {
-            binding.setImg(imageBean);
-//            float height = (ctx.getResources().getDisplayMetrics().widthPixels / imageBean.getImg_width()) * imageBean.getImg_height();
-
-            binding.getRoot().setLayoutParams(new AbsListView.LayoutParams(imageBean.getImg_width(), imageBean.getImg_height()));
-            binding.executePendingBindings();
+            int width=ctx.getResources().getDisplayMetrics().widthPixels;
+            float height = ((width*1.0f) / imageBean.getImg_with()) * imageBean.getImg_height();
+            binding.getRoot().setLayoutParams(new AbsListView.LayoutParams(width, (int) height));
+            Glide.with(binding.getRoot().getContext()).load(imageBean.getImg_url()).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.IMMEDIATE).override(width, (int) height).centerCrop().into(binding.iv);
         }
     }
 }

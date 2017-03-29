@@ -12,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.example.admin.quwang.http.MyGlideModule"
+            android:value="GlideModule"
+            >
+
+        </meta-data>
         <activity
             android:name=".view.activity.WelComeActivity"
             android:theme="@style/TranslateTheme">

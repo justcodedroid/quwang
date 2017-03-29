@@ -1,5 +1,6 @@
 package com.example.admin.quwang.model;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.utils.HttpUtils;
@@ -12,5 +13,6 @@ public class DetailsModelImpl implements DetailsModel {
     @Override
     public void loadDetailsBean(int id, OnLoadFinishListenr<DetailsBean> listener) {
         HttpUtils.loadDeatilsBean(id,listener);
+
     }
 }
