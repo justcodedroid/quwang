@@ -85,6 +85,7 @@ public class PingJiaFragment extends BaseFragment<FragmentPingJiaBinding> implem
                 page++;
                 break;
             case HttpModel.NOINITDATA:
+                bind.pinglunTv.setVisibility(View.VISIBLE);
             case HttpModel.NOLOADDATA:
                 Toast.makeText(a, "没有新数据了", Toast.LENGTH_SHORT).show();
                 bind.pingjiaRecycler.enableLoadMore(false);

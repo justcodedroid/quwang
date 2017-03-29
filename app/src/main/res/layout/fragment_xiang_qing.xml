@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-   >
-<TextView
-    android:text="详情"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.admin.quwang.view.extend.ZheDieListView
+                android:id="@+id/zheDieLv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="#fff"
+             ></com.example.admin.quwang.view.extend.ZheDieListView>
+            <com.example.admin.quwang.view.extend.SuperListView
+                android:id="@+id/imagesLv"
+                android:divider="@null"
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.example.admin.quwang.view.extend.SuperListView>
+        </LinearLayout>
+    </ScrollView>
 </layout>

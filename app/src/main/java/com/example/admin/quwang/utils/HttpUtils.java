@@ -8,6 +8,8 @@ import com.example.admin.quwang.bean.PingJianResultBean;
 import com.example.admin.quwang.bean.ShouYeBean;
 import com.example.admin.quwang.bean.WebResultBean;
 import com.example.admin.quwang.bean.WelcomeBean;
+import com.example.admin.quwang.bean.XiangQingImageResultBean;
+import com.example.admin.quwang.bean.XiangQingResultBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.HeadsInterceptor;
@@ -16,6 +18,8 @@ import com.example.admin.quwang.http.PingJiaService;
 import com.example.admin.quwang.http.ShouYeService;
 import com.example.admin.quwang.http.WebService;
 import com.example.admin.quwang.http.WelcomeService;
+import com.example.admin.quwang.http.XiangQingImageBeanService;
+import com.example.admin.quwang.http.XiangQingParameterService;
 
 import java.io.IOException;
 import java.util.List;
@@ -193,5 +197,48 @@ public class HttpUtils {
 
     private static boolean isEmpry(List list) {
         return list == null || list.size() == 0;
+    }
+
+    public static void loadXiangQingParameterBeans(int goodsId, final OnLoadFinishListenr<XiangQingResultBean> onLoadFinishListenr){
+        retrofit.create(XiangQingParameterService.class).loadXiangQingParameterBeans(goodsId).enqueue(new Callback<XiangQingResultBean>() {
+            @Override
+            public void onResponse(Call<XiangQingResultBean> call, Response<XiangQingResultBean> response) {
+                if(response.isSuccessful()){
+                    onLoadFinishListenr.onSuccess(response.body(),HttpModel.NORMAL);
+                }else {
+                    try {
+                        onLoadFinishListenr.onError(response.errorBody().string(),response.code());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<XiangQingResultBean> call, Throwable t) {
+                onLoadFinishListenr.onError(t.getMessage(),HttpModel.APIERROR);
+            }
+        });
+    }
+    public static void loadXiangQingImageBeans(int goodsId, final OnLoadFinishListenr<XiangQingImageResultBean> onLoadFinishListenr){
+        retrofit.create(XiangQingImageBeanService.class).loadXiangQingImageResultBeans(goodsId).enqueue(new Callback<XiangQingImageResultBean>() {
+            @Override
+            public void onResponse(Call<XiangQingImageResultBean> call, Response<XiangQingImageResultBean> response) {
+                if(response.isSuccessful()){
+                    onLoadFinishListenr.onSuccess(response.body(),HttpModel.NORMAL);
+                }else {
+                    try {
+                        onLoadFinishListenr.onError(response.errorBody().string(),response.code());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<XiangQingImageResultBean> call, Throwable t) {
+            onLoadFinishListenr.onError(t.getMessage(),HttpModel.APIERROR);
+            }
+        });
     }
 }
