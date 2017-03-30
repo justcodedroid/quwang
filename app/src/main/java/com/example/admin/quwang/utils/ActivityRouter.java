@@ -12,7 +12,7 @@ import com.example.admin.quwang.http.HttpModel;
  */
 
 public class ActivityRouter {
-    public static void router(Context ctx, int type, String idOrUrl) {
+    public static void router(Context ctx, int type, String idOrUrl,int special_type,int special_id) {
 
         switch (type){
             case HttpModel.TYPEWEB:
@@ -28,7 +28,7 @@ public class ActivityRouter {
                 int goods_id;
                 try {
                     goods_id = Integer.parseInt(idOrUrl);
-                    ShangPinXiangQingUtils.startShangPingXiangQingActivity(ctx, goods_id);
+                    ShangPinXiangQingUtils.startShangPingXiangQingActivity(ctx, goods_id,special_type,special_id);
                 } catch (Exception e) {
                     Toast.makeText(ctx, "在解析linkUrl跳转到商品详情时候，不是int类型" + idOrUrl, Toast.LENGTH_SHORT).show();
                 }
@@ -37,7 +37,6 @@ public class ActivityRouter {
                 Log.e("tag","在ActvityRouter的时候,不能识别type");
                 break;
         }
-
 
     }
 }

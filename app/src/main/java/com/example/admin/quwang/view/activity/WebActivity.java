@@ -1,8 +1,5 @@
 package com.example.admin.quwang.view.activity;
 
-import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -12,7 +9,6 @@ import android.widget.Toast;
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.WebBean;
 import com.example.admin.quwang.bean.WebResultBean;
-import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.databinding.ActivityWebBinding;
 import com.example.admin.quwang.presenter.WebPresenter;
 import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
@@ -82,7 +78,7 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> implements Web
     private class Android {
         @JavascriptInterface
         public void clickOnTopic(int goodsid, int speical_type, int specialId, int goods_attr) {
-            ShangPinXiangQingUtils.startShangPingXiangQingActivity(WebActivity.this, goodsid);
+            ShangPinXiangQingUtils.startShangPingXiangQingActivity(WebActivity.this, goodsid, speical_type, specialId);
         }
 
         @JavascriptInterface

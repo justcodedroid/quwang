@@ -67,7 +67,6 @@ public class WelComeActivity extends BaseActivity<ActivityMainBinding> implement
 
     @Override
     protected void onDestroy() {
-
         delayHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
     }
@@ -78,7 +77,7 @@ public class WelComeActivity extends BaseActivity<ActivityMainBinding> implement
             String type = welcomebean.getType();
             int i = Integer.parseInt(type);
             startActivity(new Intent(this, MainActivity.class));
-            ActivityRouter.router(this, i, welcomebean.getLink_url());
+            ActivityRouter.router(this, i, welcomebean.getLink_url(),0,0);
             finish();
         } catch (Exception e) {
 

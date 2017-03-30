@@ -22,14 +22,15 @@ public class ShangPinXiangQingPresenter implements OnLoadFinishListenr<List<Frag
         this.shangPinXiangQingView = shangPinXiangQingView;
     }
 
-    public void loadShangPinXiangQingFragments(int goods_id) {
+    public void loadShangPinXiangQingFragments(int goods_id,int specialId,int specialType) {
         shangPinXiangQingView.showLoading();
-        shangPinXiangQingModel.loadShangPinXiangQingFragments(goods_id, this);
+        shangPinXiangQingModel.loadShangPinXiangQingFragments(goods_id,specialId,specialType, this);
     }
 
     @Override
     public void onSuccess(List<Fragment> bean, int type) {
         shangPinXiangQingView.relashShangPinXiangQingFragments(bean);
+
         shangPinXiangQingView.showNormal();
     }
 

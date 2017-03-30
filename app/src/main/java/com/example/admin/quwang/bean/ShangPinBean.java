@@ -22,7 +22,7 @@ public class ShangPinBean {
     private int sort_order;
     private int special_id;
     private int special_price;
-    private int spwcial_type;
+    private int special_type;
     private String start;
     private int total_comment;
     private int user_number;
@@ -163,12 +163,12 @@ public class ShangPinBean {
         this.special_price = special_price;
     }
 
-    public int getSpwcial_type() {
-        return spwcial_type;
+    public int getSpecial_type() {
+        return special_type;
     }
 
     public void setSpwcial_type(int spwcial_type) {
-        this.spwcial_type = spwcial_type;
+        this.special_type = spwcial_type;
     }
 
     public String getStart() {

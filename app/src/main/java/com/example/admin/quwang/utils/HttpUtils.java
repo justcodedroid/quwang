@@ -2,9 +2,11 @@ package com.example.admin.quwang.utils;
 
 import android.util.Log;
 
+import com.example.admin.quwang.bean.BaseBean;
 import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.PingJianResultBean;
+import com.example.admin.quwang.bean.ShangPinXiangQingBean;
 import com.example.admin.quwang.bean.ShouYeBean;
 import com.example.admin.quwang.bean.WebResultBean;
 import com.example.admin.quwang.bean.WelcomeBean;
@@ -15,6 +17,7 @@ import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.http.PingJiaService;
+import com.example.admin.quwang.http.ShangPinService;
 import com.example.admin.quwang.http.ShouYeService;
 import com.example.admin.quwang.http.WebService;
 import com.example.admin.quwang.http.WelcomeService;
@@ -199,15 +202,15 @@ public class HttpUtils {
         return list == null || list.size() == 0;
     }
 
-    public static void loadXiangQingParameterBeans(int goodsId, final OnLoadFinishListenr<XiangQingResultBean> onLoadFinishListenr){
+    public static void loadXiangQingParameterBeans(int goodsId, final OnLoadFinishListenr<XiangQingResultBean> onLoadFinishListenr) {
         retrofit.create(XiangQingParameterService.class).loadXiangQingParameterBeans(goodsId).enqueue(new Callback<XiangQingResultBean>() {
             @Override
             public void onResponse(Call<XiangQingResultBean> call, Response<XiangQingResultBean> response) {
-                if(response.isSuccessful()){
-                    onLoadFinishListenr.onSuccess(response.body(),HttpModel.NORMAL);
-                }else {
+                if (response.isSuccessful()) {
+                    onLoadFinishListenr.onSuccess(response.body(), HttpModel.NORMAL);
+                } else {
                     try {
-                        onLoadFinishListenr.onError(response.errorBody().string(),response.code());
+                        onLoadFinishListenr.onError(response.errorBody().string(), response.code());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -216,19 +219,20 @@ public class HttpUtils {
 
             @Override
             public void onFailure(Call<XiangQingResultBean> call, Throwable t) {
-                onLoadFinishListenr.onError(t.getMessage(),HttpModel.APIERROR);
+                onLoadFinishListenr.onError(t.getMessage(), HttpModel.APIERROR);
             }
         });
     }
-    public static void loadXiangQingImageBeans(int goodsId, final OnLoadFinishListenr<XiangQingImageResultBean> onLoadFinishListenr){
+
+    public static void loadXiangQingImageBeans(int goodsId, final OnLoadFinishListenr<XiangQingImageResultBean> onLoadFinishListenr) {
         retrofit.create(XiangQingImageBeanService.class).loadXiangQingImageResultBeans(goodsId).enqueue(new Callback<XiangQingImageResultBean>() {
             @Override
             public void onResponse(Call<XiangQingImageResultBean> call, Response<XiangQingImageResultBean> response) {
-                if(response.isSuccessful()){
-                    onLoadFinishListenr.onSuccess(response.body(),HttpModel.NORMAL);
-                }else {
+                if (response.isSuccessful()) {
+                    onLoadFinishListenr.onSuccess(response.body(), HttpModel.NORMAL);
+                } else {
                     try {
-                        onLoadFinishListenr.onError(response.errorBody().string(),response.code());
+                        onLoadFinishListenr.onError(response.errorBody().string(), response.code());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -237,7 +241,30 @@ public class HttpUtils {
 
             @Override
             public void onFailure(Call<XiangQingImageResultBean> call, Throwable t) {
-            onLoadFinishListenr.onError(t.getMessage(),HttpModel.APIERROR);
+                onLoadFinishListenr.onError(t.getMessage(), HttpModel.APIERROR);
+            }
+        });
+    }
+
+    public static void loadShangPinXiangQingBean(int goodsId, int special_id, int special_type, final OnLoadFinishListenr<BaseBean<ShangPinXiangQingBean>> onLoadFinishListenr) {
+        retrofit.create(ShangPinService.class).loadShangPinXiangQingBean(goodsId,special_id,special_type).enqueue(new Callback<BaseBean<ShangPinXiangQingBean>>() {
+            @Override
+            public void onResponse(Call<BaseBean<ShangPinXiangQingBean>> call, Response<BaseBean<ShangPinXiangQingBean>> response) {
+                if (response.isSuccessful()) {
+                    onLoadFinishListenr.onSuccess(response.body(), HttpModel.NORMAL);
+                } else {
+                    try {
+                        onLoadFinishListenr.onError(response.errorBody().string(), response.code());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseBean<ShangPinXiangQingBean>> call, Throwable t) {
+                onLoadFinishListenr.onError(t.getMessage(), HttpModel.APIERROR);
+                t.printStackTrace();
             }
         });
     }

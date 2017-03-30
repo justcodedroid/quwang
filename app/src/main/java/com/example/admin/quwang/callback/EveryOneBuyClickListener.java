@@ -18,6 +18,6 @@ public class EveryOneBuyClickListener {
         this.ctx = ctx;
     }
     public void onItemClick(EveryOneBuyBean buyBean){
-        ActivityRouter.router(ctx,buyBean.getType(),buyBean.getLink_url());
+        ActivityRouter.router(ctx,buyBean.getType(),buyBean.getLink_url(),0,0);
     }
 }

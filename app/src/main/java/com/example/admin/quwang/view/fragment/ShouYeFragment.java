@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
-import android.widget.ViewFlipper;
 
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.adapter.EveryOneAdapter;
@@ -19,7 +18,6 @@ import com.example.admin.quwang.bean.OtherRecommendListBean;
 import com.example.admin.quwang.bean.PromotionListBean;
 import com.example.admin.quwang.bean.ShangPinBean;
 import com.example.admin.quwang.bean.TopAdsBean;
-import com.example.admin.quwang.bean.WebBean;
 import com.example.admin.quwang.databinding.FragmentShouyeBinding;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.presenter.ShouYePresenter;
@@ -29,11 +27,8 @@ import com.example.admin.quwang.utils.FliperUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
 import com.example.admin.quwang.utils.SuperListViewUtils;
-import com.example.admin.quwang.utils.WebUtils;
 import com.example.admin.quwang.view.ShouYeView;
 import com.example.admin.quwang.view.activity.DetatilsActivity;
-import com.example.admin.quwang.view.activity.ShangPinXiangQingActivity;
-import com.example.admin.quwang.view.activity.WebActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.HorizontalListView;
 import com.example.admin.quwang.view.extend.SuperFliper;
@@ -159,7 +154,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     @Override
     public void onItemClick(Banner banner, View itemView, int position) {
         TopAdsBean topAdsBean = bannersList.get(position);
-        ActivityRouter.router(a, topAdsBean.getType(), topAdsBean.getLink_url());
+        ActivityRouter.router(a, topAdsBean.getType(), topAdsBean.getLink_url(), 0, 0);
     }
 
 
@@ -174,8 +169,8 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
     }
 
     private void handlePromotionItemClick(int position) {
-        int goods_id = promotionListBeanList.get(position).getGoods_id();
-        ShangPinXiangQingUtils.startShangPingXiangQingActivity(a, goods_id);
+        PromotionListBean promotionListBean = promotionListBeanList.get(position);
+        ActivityRouter.router(a, HttpModel.TYPESHANGPINGXIANGQING, promotionListBean.getGoods_id() + "", promotionListBean.getSpecial_type(), Integer.parseInt(promotionListBean.getSpecial_id()));
     }
 
     private void handleHotListItemClick(int position) {
@@ -183,7 +178,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
         if (hotListBean.getLink_url().equals("qdyl")) {
             toast("个人中心fragnnt 签到");
         } else {
-            ActivityRouter.router(a, hotListBean.getType(), hotListBean.getLink_url());
+            ActivityRouter.router(a, hotListBean.getType(), hotListBean.getLink_url(), 0, 0);
         }
 
 

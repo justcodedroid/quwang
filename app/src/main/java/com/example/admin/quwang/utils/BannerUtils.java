@@ -21,7 +21,7 @@ public class BannerUtils {
         LayoutInflater inflater = LayoutInflater.from(ctx);
         for (int i = 0; i < list.size(); i++) {
             ItemBannerBinding binding = ItemBannerBinding.inflate(inflater);
-            binding.setTopads(list.get(i));
+            binding.setUrl(list.get(i).getImg_url());
             views.add(binding.getRoot());
         }
         return views;
@@ -35,5 +35,16 @@ public class BannerUtils {
         if (list.size() == 2) {
             list.addAll(list);
         }
+    }
+
+    public static List<View> convertGoodsGallery(List<String> goodsGalllery, Context ctx) {
+        List<View> views = new ArrayList<>();
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        for (int i = 0; i < goodsGalllery.size(); i++) {
+            ItemBannerBinding binding = ItemBannerBinding.inflate(inflater);
+            binding.setUrl(goodsGalllery.get(i));
+            views.add(binding.getRoot());
+        }
+        return views;
     }
 }

@@ -21,9 +21,9 @@ public class OtherRecommendClickListener {
         this.context=context;
     }
     public void onMoreClick(OtherRecommendListBean bean){
-      ActivityRouter.router(context,bean.getType(),bean.getLink_url());
+      ActivityRouter.router(context,bean.getType(),bean.getLink_url(),0,0);
     };
     public void onItemClick(AdListBean bean){
-        ActivityRouter.router(context,bean.getType(),bean.getLink_url());
+        ActivityRouter.router(context,bean.getType(),bean.getLink_url(),0,0);
     }
 }

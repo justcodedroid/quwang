@@ -17,9 +17,9 @@ import java.util.List;
 
 public class ShangPinXiangQingModelImpl implements ShangPinXiangQingModel {
     @Override
-    public void loadShangPinXiangQingFragments(int goods_id, OnLoadFinishListenr<List<Fragment>> onLoadFinishListenr) {
+    public void loadShangPinXiangQingFragments(int goods_id,int specialId,int specialType, OnLoadFinishListenr<List<Fragment>> onLoadFinishListenr) {
         List<Fragment> list=new ArrayList<>();
-        list.add(new ShangPinFragment().setGoods_id(goods_id));
+        list.add(new ShangPinFragment().setGoods_id(goods_id,specialId,specialType));
         list.add(new XiangQingFragment().setGoods_id(goods_id));
         list.add(new PingJiaFragment().setGoods_id(goods_id));
         onLoadFinishListenr.onSuccess(list, HttpModel.NORMAL);

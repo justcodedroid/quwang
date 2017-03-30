@@ -9,11 +9,13 @@ import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.databinding.ActivityDetailsBinding;
 import com.example.admin.quwang.presenter.DetatilsPresenter;
+import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
 import com.example.admin.quwang.view.DetailsView;
 import com.example.admin.quwang.view.extend.SuperScrollerView;
 
@@ -53,6 +55,7 @@ public class DetatilsActivity extends BaseActivity<ActivityDetailsBinding> imple
     public void relashWebView(String infoContent) {
         bind.wv.getSettings().setJavaScriptEnabled(true);
         bind.wv.addJavascriptInterface(new Andrroid(), "android");
+        bind.wv.addJavascriptInterface(new Android1(), "zt");
 
         bind.wv.setWebViewClient(new WebViewClient() {
             @Override
@@ -94,5 +97,26 @@ public class DetatilsActivity extends BaseActivity<ActivityDetailsBinding> imple
     public void onRetryClick() {
         super.onRetryClick();
         loadData();
+    }
+    class Android1 {
+        @JavascriptInterface
+        public void clickOnTopic(int goodsid, int speical_type, int specialId, int goods_attr) {
+            ShangPinXiangQingUtils.startShangPingXiangQingActivity(DetatilsActivity.this, goodsid, speical_type, specialId);
+        }
+
+        @JavascriptInterface
+        public void clickOnLogin() {
+            Toast.makeText(DetatilsActivity.this, "登陆", Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void clickOnCart() {
+            Toast.makeText(DetatilsActivity.this, "购物车", Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void clickOnBonus() {
+            Toast.makeText(DetatilsActivity.this, "查看优惠卷", Toast.LENGTH_SHORT).show();
+        }
     }
 }

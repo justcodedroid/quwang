@@ -22,7 +22,7 @@
                 android:divider="@null"
                 android:background="#fff"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.example.admin.quwang.view.extend.SuperListView>
+                android:layout_height="wrap_content"></com.example.admin.quwang.view.extend.SuperListView>
         </LinearLayout>
     </ScrollView>
 </layout>

@@ -20,6 +20,6 @@ public class ShangPinClickListener {
     }
 
     public void onItemClick(ShangPinBean shangPinBean) {
-        ActivityRouter.router(context, HttpModel.TYPESHANGPINGXIANGQING, shangPinBean.getGoods_id() + "");
+        ActivityRouter.router(context, HttpModel.TYPESHANGPINGXIANGQING, shangPinBean.getGoods_id() + "",shangPinBean.getSpecial_id(),shangPinBean.getSpecial_type());
     }
 }

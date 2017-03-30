@@ -11,5 +11,5 @@ import java.util.List;
  */
 
 public interface ShangPinXiangQingModel  {
-    void loadShangPinXiangQingFragments(int goods_id, OnLoadFinishListenr<List<Fragment>> onLoadFinishListenr);
+    void loadShangPinXiangQingFragments(int goods_id,int specialId,int specialType, OnLoadFinishListenr<List<Fragment>> onLoadFinishListenr);
 }

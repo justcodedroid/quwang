@@ -36,6 +36,7 @@ public class XiangQingImageAdapter extends BaseAdapter {
             list.clear();
             return;
         }
+
         list.addAll(imageBeanList);
     }
 
@@ -84,7 +85,7 @@ public class XiangQingImageAdapter extends BaseAdapter {
             int width=ctx.getResources().getDisplayMetrics().widthPixels;
             float height = ((width*1.0f) / imageBean.getImg_with()) * imageBean.getImg_height();
             binding.getRoot().setLayoutParams(new AbsListView.LayoutParams(width, (int) height));
-            Glide.with(binding.getRoot().getContext()).load(imageBean.getImg_url()).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.IMMEDIATE).override(width, (int) height).centerCrop().into(binding.iv);
+            Glide.with(binding.getRoot().getContext()).load(imageBean.getImg_url()).diskCacheStrategy(DiskCacheStrategy.NONE).priority(Priority.IMMEDIATE).override(width, (int) height).centerCrop().into(binding.iv);
         }
     }
 }
