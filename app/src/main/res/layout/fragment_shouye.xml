@@ -162,7 +162,8 @@
                 android:text="客服"
                 android:textColor="#fff" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
+
                 android:id="@+id/search_edt"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"

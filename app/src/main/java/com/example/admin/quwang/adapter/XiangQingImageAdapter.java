@@ -65,10 +65,11 @@ public class XiangQingImageAdapter extends BaseAdapter {
             hodler = new ImageHodler(inflate);
             convertView.setTag(hodler);
             // 防止过度获取图片  出现oom
-            hodler.bind(list.get(position));
+
         } else {
             hodler = (ImageHodler) convertView.getTag();
         }
+        hodler.bind(list.get(position));
 
 
         return convertView;

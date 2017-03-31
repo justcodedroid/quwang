@@ -2,11 +2,9 @@ package com.example.admin.quwang.view.extend;
 
 import android.animation.Animator;
 import android.animation.FloatEvaluator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,8 +12,8 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.OverScroller;
-import android.widget.ScrollView;
+
+import com.example.admin.quwang.view.TopViewInter;
 
 /**
  * Created by admin on 2017/3/30.
@@ -23,8 +21,8 @@ import android.widget.ScrollView;
 
 public class DragToDetailsLayout extends LinearLayout implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener, Runnable {
 
-    private ScrollView topScroller;
-    private ScrollView bottomScroller;
+    private TopViewInter topScroller;
+    private BottomViewInter bottomScroller;
     private int startX;
     private int startY;
     private int minX;
@@ -36,6 +34,7 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
     private OnFirstLoadListener loadListener;
     private ValueAnimator valueAnimator;
     private OnToggleListener toggleListener;
+    private boolean isFirstUp;
 
     public DragToDetailsLayout(Context context) {
         super(context);
@@ -80,24 +79,27 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
         isPull = false;
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                Log.e("tag11", "Action_DOWN");
                 startX = (int) ev.getRawX();
                 startY = (int) ev.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-
                 minX = (int) (ev.getRawX() - startX);
                 minY = (int) (ev.getRawY() - startY);
+                Log.e("tag11", minY + "------------>" + getCurrentPosition());
                 if (Math.abs(minY) / 2 > Math.abs(minX) && Math.abs(minY) > minScroll) {
                     if (minY < 0 && getCurrentPosition() == 0) {
-                        if (topScroller.getChildAt(0).getHeight() - topScroller.getScrollY() == topScroller.getHeight()) {
+                        if (topScroller.isBottom()) {
                             startX = (int) ev.getRawX();
                             startY = (int) ev.getRawY();
                             isDRAG = true;
                             return true;
                         }
                     }
+
                     if (minY > 0 && getCurrentPosition() == 1) {
-                        if (bottomScroller.getScrollY() == 0) {
+                        if(bottomScroller==null)break;
+                        if (bottomScroller.isTop()) {
                             startX = (int) ev.getRawX();
                             startY = (int) ev.getRawY();
                             isPull = true;
@@ -127,16 +129,15 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
                 }
                 if (isPull) {
                     scrollTo(0, (int) (getScrollY() - minY));
-                    isPull = true;
                 }
                 startY = (int) event.getRawY();
-                Log.e("tag", isDRAG + "----->" + isPull);
 
 
                 break;
             case MotionEvent.ACTION_UP:
                 if (isDRAG) {
                     if (getScrollY() > getHeight() / 10) {
+                        isFirstUp = true;
                         toUp();
                     } else {
                         toDown();
@@ -150,7 +151,6 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
                     }
                 }
                 break;
-
         }
         return true;
     }
@@ -174,7 +174,8 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
     @Override
     public void onAnimationEnd(Animator animation) {
         if (loadListener != null) {
-            if (!firstLoad) {
+            if (!firstLoad && isFirstUp) {
+
                 firstLoad = true;
                 post(this);
             }
@@ -219,34 +220,35 @@ public class DragToDetailsLayout extends LinearLayout implements Animator.Animat
     }
 
     private void wrap() {
-        topScroller = getWarpView(0);
-        bottomScroller = getWarpView(0);
-        addView(topScroller);
-        addView(bottomScroller);
-
+        topScroller = (TopViewInter) getChildAt(0);
     }
 
-    private ScrollView getWarpView(int i) {
-        View childAt = getChildAt(i);
-        removeView(childAt);
-        ScrollView scrollView = new ScrollView(getContext());
-        scrollView.setVerticalScrollBarEnabled(false);
-        scrollView.addView(childAt);
-        return scrollView;
+    public void setBottomScroller(BottomViewInter bottomScroller) {
+        this.bottomScroller = bottomScroller;
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-        for (int i = 0; i < getChildCount(); i++) {
-            getChildAt(i).layout(0, i * getHeight(), getWidth(), getHeight() * (i + 1));
+    private BottomViewInter getBottomView(int i) {
+        View child = getChildAt(i);
+        if (child instanceof BottomViewInter) {
+
         }
+        return null;
     }
+
+    boolean isFirst;
+
 
     public interface OnToggleListener {
         void onUp();
 
         void onDown();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        View childAt = getChildAt(1);
+        childAt.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, getHeight()));
     }
 
     public void setOnToggleListener(OnToggleListener listener) {

@@ -47,8 +47,9 @@ public class TimeView extends LinearLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         handler.removeCallbacksAndMessages(null);
+        super.onDetachedFromWindow();
+
     }
 
     @Override
@@ -179,6 +180,7 @@ public class TimeView extends LinearLayout {
     public interface OnCompleteListener {
         void onComplete();
     }
+
 
     public void setOnCompleteListener(OnCompleteListener listener) {
         this.listener = listener;

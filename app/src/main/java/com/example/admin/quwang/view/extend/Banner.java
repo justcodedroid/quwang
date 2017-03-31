@@ -68,10 +68,12 @@ public class Banner extends RelativeLayout implements View.OnClickListener, View
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+        Log.e("tagasd","banner  stio");
         if (isLoop) {
             handler.removeCallbacksAndMessages(null);
         }
+        super.onDetachedFromWindow();
+
     }
 
     @Override

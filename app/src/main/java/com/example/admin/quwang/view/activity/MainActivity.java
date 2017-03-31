@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.module.GlideModule;
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.databinding.ActivityMain2Binding;
 import com.example.admin.quwang.presenter.MainPresenter;
@@ -68,5 +71,12 @@ public class MainActivity extends BaseActivity<ActivityMain2Binding> implements 
             }
         }
         return position;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Glide.get(this).clearMemory();
+        super.onDestroy();
+
     }
 }

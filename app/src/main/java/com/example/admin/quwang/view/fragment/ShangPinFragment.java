@@ -3,20 +3,26 @@ package com.example.admin.quwang.view.fragment;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.quwang.R;
 import com.example.admin.quwang.bean.BonusInfo;
 import com.example.admin.quwang.bean.GoodsInfo;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.RecommendGood;
 import com.example.admin.quwang.bean.ShangPinXiangQingBean;
+import com.example.admin.quwang.callback.AllPingJiaListener;
 import com.example.admin.quwang.databinding.FragmentShangPinBinding;
+import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.presenter.ShangPinPresenter;
+import com.example.admin.quwang.utils.ActivityRouter;
 import com.example.admin.quwang.utils.BannerUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.view.ShangPinView;
 import com.example.admin.quwang.view.activity.TuPianYuLanActivity;
 import com.example.admin.quwang.view.extend.Banner;
+import com.example.admin.quwang.view.extend.BottomViewInter;
 import com.example.admin.quwang.view.extend.DragToDetailsLayout;
 import com.example.admin.quwang.view.extend.HorizontalListView;
 
@@ -27,7 +33,7 @@ import java.util.List;
  * Created by admin on 2017/3/28.
  */
 
-public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> implements ShangPinView, Banner.OnItemClickListener, DragToDetailsLayout.OnFirstLoadListener, DragToDetailsLayout.OnToggleListener {
+public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> implements ShangPinView, Banner.OnItemClickListener, DragToDetailsLayout.OnFirstLoadListener, DragToDetailsLayout.OnToggleListener, HorizontalListView.OnItemClickListener {
     int goods_id;
     int special_type;
     int special_id;
@@ -35,6 +41,7 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
     private List<String> goodsGalleryList;
     private XiangQingFragment xiangQingFragment;
     DragToDetailsLayout.OnToggleListener onToggleListener;
+    private List<RecommendGood> recommentGoodsList;
 
     public ShangPinFragment setGoods_id(int goods_id, int special_id, int special_type) {
         this.goods_id = goods_id;
@@ -58,6 +65,8 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
         xiangQingFragment = new XiangQingFragment().setGoods_id(goods_id);
         shangPinPresenter.getShangPinXiangQingBean(goods_id, special_id, special_type);
         onToggleListener = (DragToDetailsLayout.OnToggleListener) a;
+        bind.setPingjia(new AllPingJiaListener(a));
+
     }
 
     @Override
@@ -82,7 +91,6 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
             bind.qiangou.setVisibility(View.GONE);
             return;
         }
-        Log.e("tagremaintime", goodsInfo.getRemaining_time() + "");
         bind.timeView.setTime(goodsInfo.getRemaining_time());
         bind.timeView.startLoop();
     }
@@ -119,9 +127,11 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
     @Override
     public void relashTuiJian(List<RecommendGood> recommendGoodList) {
         if (recommendGoodList == null || recommendGoodList.size() == 0) return;
+        this.recommentGoodsList = recommendGoodList;
         bind.tuijiangroup.setVisibility(View.VISIBLE);
         List<View> list = HorizontalListViewUtils.convertTuiJianViews(recommendGoodList, a);
         bind.tuijianLv.setAdapter(new HorizontalListView.SimpleHorizontalAdapter(list));
+        bind.tuijianLv.setOnItemClickListener(this);
     }
 
 
@@ -144,6 +154,14 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
     @Override
     public void onFirstLoad() {
         getFragmentManager().beginTransaction().replace(R.id.bottomFragmentGroup, xiangQingFragment).commit();
+        bind.bottomFragmentGroup.post(new Runnable() {
+            @Override
+            public void run() {
+                BottomViewInter bottomViewInter = (BottomViewInter) bind.bottomFragmentGroup.findViewById(R.id.imagesLv);
+                bind.dragLayout.setBottomScroller(bottomViewInter);
+            }
+        });
+
     }
 
     @Override
@@ -156,5 +174,12 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
     public void onDown() {
         bind.descTv.setText("继续拖动，查看图文详情");
         onToggleListener.onDown();
+
+    }
+
+    @Override
+    public void onItemClick(HorizontalScrollView horizontalScrollView, View itemView, int position) {
+        RecommendGood recommendGood = recommentGoodsList.get(position);
+        ActivityRouter.router(a, HttpModel.TYPESHANGPINGXIANGQING, recommendGood.getGoods_id() + "", 0, 0);
     }
 }

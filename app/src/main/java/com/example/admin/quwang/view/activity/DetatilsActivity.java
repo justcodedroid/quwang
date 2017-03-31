@@ -26,7 +26,6 @@ import com.example.admin.quwang.view.extend.SuperScrollerView;
 public class DetatilsActivity extends BaseActivity<ActivityDetailsBinding> implements DetailsView {
 
     private DetatilsPresenter presenter;
-
     @Override
     protected void initImpl() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
