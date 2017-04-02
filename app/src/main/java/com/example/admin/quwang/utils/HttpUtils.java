@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.admin.quwang.bean.BaseBean;
 import com.example.admin.quwang.bean.DetailsBean;
+import com.example.admin.quwang.bean.PinLeiBean;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.PingJianResultBean;
 import com.example.admin.quwang.bean.ShangPinXiangQingBean;
@@ -17,6 +18,7 @@ import com.example.admin.quwang.callback.SimpleCallBack;
 import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
+import com.example.admin.quwang.http.PeiLeiService;
 import com.example.admin.quwang.http.PingJiaService;
 import com.example.admin.quwang.http.ShangPinService;
 import com.example.admin.quwang.http.ShouYeService;
@@ -27,6 +29,7 @@ import com.example.admin.quwang.http.XiangQingParameterService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -113,7 +116,7 @@ public class HttpUtils {
         return HttpModel.APIERROR;
     }
 
-    private static int getNormalType(List list, int page) {
+    public static int getNormalType(List list, int page) {
         boolean empry = isEmpry(list);
 
         if (empry && page == 1) {
@@ -137,5 +140,7 @@ public class HttpUtils {
         return list == null || list.size() == 0;
     }
 
-
+    public static void loadPinLeiBean(String type, String sort, int ad_id, int page, Map<String,String> map, OnLoadFinishListenr<BaseBean<PinLeiBean>> listenr){
+        retrofit.create(PeiLeiService.class).getPinLeiBea(type,sort,ad_id,page,map).enqueue(new SimpleCallBack<BaseBean<PinLeiBean>>(listenr));
+    }
 }

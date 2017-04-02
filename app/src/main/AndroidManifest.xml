@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.example.admin.quwang.http.MyGlideModule"
-            android:value="GlideModule"></meta-data>
+            android:value="GlideModule" />
 
         <activity
             android:name=".view.activity.WelComeActivity"
@@ -32,7 +32,9 @@
         <activity android:name=".view.activity.TuPianYuLanActivity" />
         <activity android:name=".view.activity.WebActivity" />
         <activity android:name=".view.activity.ShangPinXiangQingActivity" />
-        <activity android:name=".view.activity.PingJiaActivity"></activity>
+        <activity android:name=".view.activity.PingJiaActivity" />
+        <activity android:name=".view.activity.PinLeiActivity" />
+        <activity android:name=".view.activity.AllCategoryActivity"></activity>
     </application>
 
 </manifest>

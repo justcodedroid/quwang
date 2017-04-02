@@ -35,6 +35,7 @@ public class SimpleCallBack<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
+        t.printStackTrace();
         listenr.onError(t.getMessage(), HttpModel.APIERROR);
     }
 }

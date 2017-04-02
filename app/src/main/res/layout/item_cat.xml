@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+ >
+<data>
+    <variable
+        name="itemclick"
+        type="com.example.admin.quwang.callback.CatItemClickListener"></variable>
+    <variable
+        name="catbean"
+        type="com.example.admin.quwang.bean.CatBean"></variable>
+</data>
+    <TextView
+        android:onClick="@{()->itemclick.toPinLeiActivity(catbean)}"
+        android:layout_margin="5dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:text="@{catbean.cat_name}"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+</layout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.example.admin.quwang.callback.PinLeiItemClickListener"></variable>
+
+        <variable
+            name="shangpin"
+            type="com.example.admin.quwang.bean.PinLeiBean.SimpleShangPinBean"></variable>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="1px"
+        android:background="#fff"
+        android:onClick="@{()->listener.to(shangpin)}"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@{shangpin.img_url}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:lines="2"
+            android:padding="3dp"
+            android:text="@{shangpin.goods_name}"
+            android:textColor="#333" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{@string/price+shangpin.app_price}"
+                android:textColor="#e53437" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/xiaoliang+shangpin.sold_num}"
+                android:textColor="#ccc" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

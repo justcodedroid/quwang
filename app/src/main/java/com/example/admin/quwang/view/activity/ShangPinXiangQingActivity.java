@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
 import com.example.admin.quwang.R;
@@ -64,5 +65,8 @@ public class ShangPinXiangQingActivity extends BaseActivity<ActivityShangPinXian
     public void onAnimationUpdate(ValueAnimator animation) {
         float value = (float) animation.getAnimatedValue();
         bind.navigation.scrollTo(0, (int) value);
+    }
+    public void toogleStyle(View v){
+
     }
 }

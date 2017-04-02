@@ -2,4 +2,12 @@
     <string name="app_name">quwang</string>
     <string name="price">￥</string>
     <string name="xiaoliang">销量</string>
+    <string name="yuexiao">月销</string>
+    <string name="fenge"> | </string>
+    <string name="pingjia"> 评价 </string>
+    <string-array name="shanxuan">
+        <item>价格</item>
+        <item>特点</item>
+        <item>品牌</item>
+    </string-array>
 </resources>

@@ -24,6 +24,7 @@ public class ShangPinPresenter implements OnLoadFinishListenr<BaseBean<ShangPinX
 
     public void getShangPinXiangQingBean(int goodsid, int special_id, int special_type) {
         shangPinView.showLoading();
+
         HttpUtils.loadShangPinXiangQingBean(goodsid, special_id, special_type, this);
     }
 

@@ -3,6 +3,7 @@ package com.example.admin.quwang.utils;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -24,6 +25,5 @@ public class BindAdapter {
     public static void loadImage(ImageView imageView,String url){
         // 过度压缩导致图片变绿 ，需要配合设置ARGB+缓存source
   Glide .with(imageView.getContext()).load(url).centerCrop().crossFade().into(imageView);
-
     }
 }
