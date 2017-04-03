@@ -1,5 +1,6 @@
 package com.example.admin.quwang.presenter;
 
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
 import com.example.admin.quwang.bean.BaseBean;
@@ -25,16 +26,16 @@ public class PinLeiPresenter implements OnLoadFinishListenr<BaseBean<PinLeiBean>
         this.pinLeiView = pinLeiView;
     }
 
-    public void getPinLeiBean(String type, String sort, int ad_id,Map<String,String> map) {
+    public void getPinLeiBean(String type, String sort, int ad_id, Map<String, String> map) {
         if (page == 1) {
             pinLeiView.showLoading();
         }
-        pinLeiModel.loadPinLeiBean(type, sort, ad_id, page,map , this);
+        pinLeiModel.loadPinLeiBean(type, sort, ad_id, page, map, this);
     }
 
-    public void regetPinLeiBean(String type, String sort, int ad_id,Map<String,String> map) {
+    public void regetPinLeiBean(String type, String sort, int ad_id, Map<String, String> map) {
         page = 1;
-        getPinLeiBean(type, sort, ad_id,map);
+        getPinLeiBean(type, sort, ad_id, map);
     }
 
 
@@ -43,10 +44,10 @@ public class PinLeiPresenter implements OnLoadFinishListenr<BaseBean<PinLeiBean>
         int normalType = HttpUtils.getNormalType(bean.getData().getGoods_list(), page);
         if (page == 1) {
             pinLeiView.showNormal();
+            pinLeiView.relashAdInfo(bean.getData().getAd_info());
             pinLeiView.relashCatBeans(bean.getData().getCat_list());
         }
         pinLeiView.realshShangPinBeans(bean.getData().getGoods_list(), normalType);
-
         page++;
     }
 

@@ -26,7 +26,7 @@ public class PinLeiBean {
 
     public static class AdInfo {
         private String img_url;
-        private int link_url;
+        private String link_url;
         private String main_title;
         private String subtitle;
         private int type;
@@ -40,11 +40,11 @@ public class PinLeiBean {
             this.img_url = img_url;
         }
 
-        public int getLink_url() {
+        public String getLink_url() {
             return link_url;
         }
 
-        public void setLink_url(int link_url) {
+        public void setLink_url(String link_url) {
             this.link_url = link_url;
         }
 

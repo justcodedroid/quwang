@@ -23,5 +23,6 @@ public class PeiLeiListHolder extends BaseStyleHolder<PinLeiBean.SimpleShangPinB
     protected void bindData(ItemListPinleiBinding bind, PinLeiBean.SimpleShangPinBean data) {
     bind.setBean(data);
         bind.setListener(new PinLeiItemClickListener(bind.getRoot().getContext()));
+bind.executePendingBindings();
     }
 }

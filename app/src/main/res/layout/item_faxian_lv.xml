@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable
+        name="click"
+        type="com.example.admin.quwang.callback.HotRecommendListener"></variable>
+    <variable
+        name="hot"
+        type="com.example.admin.quwang.bean.FaXianBean.DataBean.HotRecommendBean"></variable>
+</data>
+    <LinearLayout
+        android:onClick="@{()->click.to(hot)}"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="100dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@{hot.cat_img}"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="@{hot.cat_name}"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</layout>

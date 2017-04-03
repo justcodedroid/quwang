@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <data>
+        <variable
+            name="listener"
+            type="com.example.admin.quwang.callback.AllCategoryListener"></variable>
+        <variable
+            name="sub"
+            type="com.example.admin.quwang.bean.Categorybean.SubCategoryBean"></variable>
+    </data>
+    <LinearLayout
+        android:onClick="@{()->listener.toPinLeiActivity(sub)}"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:padding="1px"
+        android:background="#eee"
+        android:layout_height="wrap_content">
+      <LinearLayout
+          android:orientation="vertical"
+          android:background="#fff"
+          android:padding="5dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          <ImageView
+              android:scaleType="fitCenter"
+              android:src="@{sub.cat_img}"
+              android:layout_marginBottom="5dp"
+              android:layout_width="70dp"
+              android:layout_height="90dp" />
+          <TextView
+              android:text="@{sub.cat_name}"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" />
+      </LinearLayout>
+    </LinearLayout>
+
+</layout>

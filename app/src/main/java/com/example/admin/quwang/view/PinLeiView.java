@@ -12,5 +12,6 @@ import java.util.List;
 public interface PinLeiView extends BaseView{
     void realshShangPinBeans(List<PinLeiBean.SimpleShangPinBean> simpleShangPinBeens,int type);
     void relashCatBeans(List<CatBean> catBeanList);
+    void relashAdInfo(PinLeiBean.AdInfo adInfo);
     void showError(String msg);
 }

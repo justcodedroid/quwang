@@ -110,10 +110,10 @@ public abstract class BaseHeadAndFooterAdapter<B, T extends BaseHolder> extends 
     protected abstract T onCreateViewHolderImpl(ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position >= heads.size() && position < list.size()) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position >= heads.size() && position < list.size()+heads.size()) {
             T h = (T) holder;
-            h.bind(list.get(position));
+            h.bind(list.get(position-heads.size()));
         }
     }
 

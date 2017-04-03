@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <import type="android.view.View"></import>
         <variable
             name="listener"
             type="com.example.admin.quwang.callback.PinLeiItemClickListener"></variable>
@@ -13,6 +13,7 @@
     </data>
 
     <LinearLayout
+        android:visibility="@{shangpin==null?View.GONE:View.VISIBLE}"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_margin="1px"

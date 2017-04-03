@@ -28,6 +28,7 @@ import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.utils.ShangPinXiangQingUtils;
 import com.example.admin.quwang.utils.SuperListViewUtils;
 import com.example.admin.quwang.view.ShouYeView;
+import com.example.admin.quwang.view.activity.AllCategoryActivity;
 import com.example.admin.quwang.view.activity.DetatilsActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.HorizontalListView;
@@ -43,7 +44,7 @@ import java.util.List;
  * Created by admin on 2017/3/26.
  */
 
-public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implements ShouYeView, Banner.OnItemClickListener, HorizontalListView.OnItemClickListener, SuperFliper.OnItemClickListener, TimeView.OnCompleteListener, SuperScrollerView.OnScrolleListener {
+public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implements ShouYeView, Banner.OnItemClickListener, HorizontalListView.OnItemClickListener, SuperFliper.OnItemClickListener, TimeView.OnCompleteListener, SuperScrollerView.OnScrolleListener, View.OnClickListener {
     private List<TopAdsBean> bannersList = new ArrayList<>();
     private ShouYePresenter shouYePresenter;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
@@ -64,6 +65,7 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
         bind.timeView.setOnCompleteListener(this);
         bind.promotionListView.setOnItemClickListener(this);
         bind.sv.setOnScrolleListener(this);
+        bind.fenleiRb.setOnClickListener(this);
         shouYePresenter = new ShouYePresenter();
         shouYePresenter.setShouYeView(this);
         shouYePresenter.loadShouYe();
@@ -203,5 +205,12 @@ public class ShouYeFragment extends BaseFragment<FragmentShouyeBinding> implemen
         v = Math.min(1.0f, Math.max(0, v));
         int color = (int) argbEvaluator.evaluate(v, Color.TRANSPARENT, Color.parseColor("#dd2929"));
         bind.markView.setBackgroundColor(color);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.fenlei_rb){
+            startActivity(new Intent(a, AllCategoryActivity.class));
+        }
     }
 }

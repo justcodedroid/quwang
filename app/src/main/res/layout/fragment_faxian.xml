@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ddd">
 
-        <TextView
-            android:id="@+id/tv"
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.admin.quwang.view.extend.HorizontalListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="5dp"
+                android:background="#fff"></com.example.admin.quwang.view.extend.HorizontalListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="热门专题"
+                android:textSize="20sp" />
+
+            <com.example.admin.quwang.view.extend.HorizontalListView
+                android:id="@+id/topicLv"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#fff"></com.example.admin.quwang.view.extend.HorizontalListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="男性用品"
+                android:textSize="20sp" />
+
+            <com.example.admin.quwang.view.extend.SuperRecyclerView
+                android:id="@+id/manRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:nestedScrollingEnabled="false"></com.example.admin.quwang.view.extend.SuperRecyclerView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="女性用品"
+                android:textSize="20sp" />
+
+            <com.example.admin.quwang.view.extend.SuperRecyclerView
+                android:id="@+id/womanRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:nestedScrollingEnabled="false"></com.example.admin.quwang.view.extend.SuperRecyclerView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

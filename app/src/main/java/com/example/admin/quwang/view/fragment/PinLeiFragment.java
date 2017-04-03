@@ -12,8 +12,10 @@ import com.example.admin.quwang.adapter.CatAdapter;
 import com.example.admin.quwang.adapter.PinLeiAdapter;
 import com.example.admin.quwang.bean.CatBean;
 import com.example.admin.quwang.bean.PinLeiBean;
+import com.example.admin.quwang.callback.AdItemClickListener;
 import com.example.admin.quwang.databinding.FragmentPinleiBinding;
 import com.example.admin.quwang.databinding.HeadCatBinding;
+import com.example.admin.quwang.databinding.ItemAdBinding;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.presenter.PinLeiPresenter;
 import com.example.admin.quwang.utils.HttpUtils;
@@ -36,6 +38,7 @@ public class PinLeiFragment extends BaseFragment<FragmentPinleiBinding> implemen
     private PinLeiAdapter pinLeiAdapter;
     private PinLeiPresenter pinLeiPresenter;
     private HeadCatBinding catBinding;
+    private ItemAdBinding itemAdBinding;
 
     public PinLeiFragment newInstance(String type, String sort, int ad_id) {
         this.type = type;
@@ -73,7 +76,7 @@ public class PinLeiFragment extends BaseFragment<FragmentPinleiBinding> implemen
 
     @Override
     public void loadMore() {
-        pinLeiPresenter.getPinLeiBean(type, sort, ad_id,PeiLeiMapUtils.map);
+        pinLeiPresenter.getPinLeiBean(type, sort, ad_id, PeiLeiMapUtils.map);
     }
 
     @Override
@@ -111,6 +114,16 @@ public class PinLeiFragment extends BaseFragment<FragmentPinleiBinding> implemen
     }
 
     @Override
+    public void relashAdInfo(PinLeiBean.AdInfo adInfo) {
+        if (adInfo == null||adInfo.getImg_url()==null) return;
+        Log.e("tagasd",adInfo.getImg_url()+"");
+        itemAdBinding = ItemAdBinding.inflate(LayoutInflater.from(a));
+        itemAdBinding.setInfo(adInfo);
+        itemAdBinding.setClick(new AdItemClickListener(a));
+        pinLeiAdapter.addHeadView(itemAdBinding.getRoot());
+    }
+
+    @Override
     public void showError(String msg) {
         Toast.makeText(a, "" + msg, Toast.LENGTH_SHORT).show();
     }
@@ -119,7 +132,7 @@ public class PinLeiFragment extends BaseFragment<FragmentPinleiBinding> implemen
     @Override
     public void onRetryClick() {
         super.onRetryClick();
-        pinLeiPresenter.getPinLeiBean(type, sort, ad_id,PeiLeiMapUtils.map);
+        pinLeiPresenter.getPinLeiBean(type, sort, ad_id, PeiLeiMapUtils.map);
     }
 
     public void reload() {
@@ -127,7 +140,10 @@ public class PinLeiFragment extends BaseFragment<FragmentPinleiBinding> implemen
         pinLeiAdapter.addFooterView();
         if (catBinding != null)
             pinLeiAdapter.removeHeadView(catBinding.getRoot());
-        pinLeiPresenter.regetPinLeiBean(type, sort, ad_id,PeiLeiMapUtils.map);
+        if (itemAdBinding != null) {
+            pinLeiAdapter.removeHeadView(itemAdBinding.getRoot());
+        }
+        pinLeiPresenter.regetPinLeiBean(type, sort, ad_id, PeiLeiMapUtils.map);
     }
 
     int spanCount = 2;

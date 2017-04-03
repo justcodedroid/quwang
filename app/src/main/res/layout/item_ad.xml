@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="click"
+            type="com.example.admin.quwang.callback.AdItemClickListener"></variable>
+        <variable
+            name="info"
+            type="com.example.admin.quwang.bean.PinLeiBean.AdInfo"></variable>
+    </data>
+<LinearLayout
+    android:onClick="@{()->click.to(info)}"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+    <ImageView
+        android:src="@{info.img_url}"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+</LinearLayout>
+</layout>

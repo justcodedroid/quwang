@@ -17,5 +17,6 @@ public class PinLeiGridHolder extends BaseStyleHolder<PinLeiBean.SimpleShangPinB
     protected void bindData(ItemGridStyleBinding bind, PinLeiBean.SimpleShangPinBean data) {
         bind.setShangpin(data);
         bind.setListener(new PinLeiItemClickListener(bind.getRoot().getContext()));
+        bind.executePendingBindings();
     }
 }

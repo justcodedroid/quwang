@@ -3,7 +3,9 @@ package com.example.admin.quwang.utils;
 import android.util.Log;
 
 import com.example.admin.quwang.bean.BaseBean;
+import com.example.admin.quwang.bean.CategoryList;
 import com.example.admin.quwang.bean.DetailsBean;
+import com.example.admin.quwang.bean.FaXianBean;
 import com.example.admin.quwang.bean.PinLeiBean;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.PingJianResultBean;
@@ -15,7 +17,9 @@ import com.example.admin.quwang.bean.XiangQingImageResultBean;
 import com.example.admin.quwang.bean.XiangQingResultBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.callback.SimpleCallBack;
+import com.example.admin.quwang.http.AllCatrgoryService;
 import com.example.admin.quwang.http.DetailsService;
+import com.example.admin.quwang.http.FaXianSerevice;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.http.PeiLeiService;
@@ -140,7 +144,14 @@ public class HttpUtils {
         return list == null || list.size() == 0;
     }
 
-    public static void loadPinLeiBean(String type, String sort, int ad_id, int page, Map<String,String> map, OnLoadFinishListenr<BaseBean<PinLeiBean>> listenr){
-        retrofit.create(PeiLeiService.class).getPinLeiBea(type,sort,ad_id,page,map).enqueue(new SimpleCallBack<BaseBean<PinLeiBean>>(listenr));
+    public static void loadPinLeiBean(String type, String sort, int ad_id, int page, Map<String, String> map, OnLoadFinishListenr<BaseBean<PinLeiBean>> listenr) {
+        retrofit.create(PeiLeiService.class).getPinLeiBea(type, sort, ad_id, page, map).enqueue(new SimpleCallBack<BaseBean<PinLeiBean>>(listenr));
+    }
+
+    public static void loadAllCategoryBeans(OnLoadFinishListenr<BaseBean<CategoryList>> onLoadFinishListenr) {
+        retrofit.create(AllCatrgoryService.class).getAllCategortBeans().enqueue(new SimpleCallBack<BaseBean<CategoryList>>(onLoadFinishListenr));
+    }
+    public static void loadFaXianBean(OnLoadFinishListenr<FaXianBean> onLoadFinishListenr){
+        retrofit.create(FaXianSerevice.class).getFaXianBean().enqueue(new SimpleCallBack<FaXianBean>(onLoadFinishListenr));
     }
 }

@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.admin.quwang.view.activity.AllCategoryActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#eee"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+                android:textSize="20sp"
+            android:gravity="center"
+            android:background="#fff"
+            android:text="所有商品分类" />
+        <com.example.admin.quwang.view.extend.SuperRecyclerView
+            android:id="@+id/recycler"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.example.admin.quwang.view.extend.SuperRecyclerView>
+
+    </LinearLayout>
+</layout>
