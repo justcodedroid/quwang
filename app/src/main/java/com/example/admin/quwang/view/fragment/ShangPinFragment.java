@@ -20,6 +20,7 @@ import com.example.admin.quwang.utils.ActivityRouter;
 import com.example.admin.quwang.utils.BannerUtils;
 import com.example.admin.quwang.utils.HorizontalListViewUtils;
 import com.example.admin.quwang.view.ShangPinView;
+import com.example.admin.quwang.view.activity.ShangPinXiangQingActivity;
 import com.example.admin.quwang.view.activity.TuPianYuLanActivity;
 import com.example.admin.quwang.view.extend.Banner;
 import com.example.admin.quwang.view.extend.BottomViewInter;
@@ -42,6 +43,7 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
     private XiangQingFragment xiangQingFragment;
     DragToDetailsLayout.OnToggleListener onToggleListener;
     private List<RecommendGood> recommentGoodsList;
+    private ShangPinXiangQingActivity shangPinXiangQingActivity;
 
     public ShangPinFragment setGoods_id(int goods_id, int special_id, int special_type) {
         this.goods_id = goods_id;
@@ -57,6 +59,7 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
 
     @Override
     protected void initImpl() {
+        shangPinXiangQingActivity = (ShangPinXiangQingActivity) a;
         bind.banner.setOnItemClickListener(this);
         bind.dragLayout.setOnFirstLoadListener(this);
         bind.dragLayout.setOnToggleListener(this);
@@ -85,6 +88,9 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
 
     @Override
     public void relashGoodsInfo(GoodsInfo goodsInfo) {
+        shangPinXiangQingActivity.setGoodsInfo(goodsInfo);
+        shangPinXiangQingActivity.setChecked(goodsInfo.getIs_collection()==1);
+        shangPinXiangQingActivity.setCollectionId(goodsInfo.getCollection_id());
         bind.setGoodsinfo(goodsInfo);
         if (goodsInfo.getIs_special() == 0) return;
         if (goodsInfo.getRemaining_time() == 0) {
@@ -93,6 +99,7 @@ public class ShangPinFragment extends BaseFragment<FragmentShangPinBinding> impl
         }
         bind.timeView.setTime(goodsInfo.getRemaining_time());
         bind.timeView.startLoop();
+
     }
 
     @Override

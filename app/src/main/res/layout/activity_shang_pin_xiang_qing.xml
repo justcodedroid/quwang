@@ -23,28 +23,29 @@
             <LinearLayout
 
                 android:id="@+id/navigation"
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TabLayout
-                    android:layout_marginLeft="45dp"
                     android:id="@+id/tab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="45dp"
                     app:tabGravity="center"
                     app:tabIndicatorColor="#dd2929"
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="#dd2929"
                     app:tabTextColor="#ccc"></android.support.design.widget.TabLayout>
+
                 <TextView
-                    android:gravity="center"
-                    android:textColor="#666"
-                    android:text="图文详情"
-                    android:textSize="20sp"
                     android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize" />
+                    android:layout_height="?actionBarSize"
+                    android:gravity="center"
+                    android:text="图文详情"
+                    android:textColor="#666"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <com.example.admin.quwang.view.extend.RedRadioButton xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -86,37 +87,50 @@
                 android:padding="5dp"
                 android:text="客服" />
 
-            <RadioButton
-                android:layout_marginLeft="1dp"
-                android:enabled="true"
+            <LinearLayout
+                android:onClick="shoucang"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/shoucangRB"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_shoucang"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="收藏"
+                    android:textColor="#333" />
+            </LinearLayout>
+
+            <Button
+                android:onClick="addGouWuChe"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:button="@null"
-                android:drawableTop="@drawable/selector_shoucang"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="收藏" />
-            <Button
-                android:text="加入购物车"
                 android:layout_weight="3"
-                android:textColor="#fff"
-                android:textSize="18sp"
                 android:background="#ffaf34"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-        <Button
-                android:text="立即购买"
-                android:layout_weight="3"
+                android:text="加入购物车"
                 android:textColor="#fff"
-                android:textSize="18sp"
-                android:background="#dd2929"
+                android:textSize="18sp" />
+
+            <Button
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#dd2929"
+                android:text="立即购买"
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
         </LinearLayout>
-      </LinearLayout>
+    </LinearLayout>
 
 </layout>

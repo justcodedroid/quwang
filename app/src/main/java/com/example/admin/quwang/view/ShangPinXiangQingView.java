@@ -12,4 +12,9 @@ import java.util.List;
 
 public interface ShangPinXiangQingView extends BaseView{
 void relashShangPinXiangQingFragments(List<Fragment> list);
+    void shoucangSuccess(String msg, String collectionId);
+    void shoucangFailed(String msg);
+    void shouGouWuChe(String msg);
+    void showLoadingDialog();
+    void  dismissLoadingDialog();
 }

@@ -2,14 +2,17 @@ package com.example.admin.quwang.utils;
 
 import android.util.Log;
 
+import com.example.admin.quwang.bean.AddCaetBean;
 import com.example.admin.quwang.bean.BaseBean;
 import com.example.admin.quwang.bean.CategoryList;
 import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.bean.FaXianBean;
+import com.example.admin.quwang.bean.GoodsAttrBean;
 import com.example.admin.quwang.bean.PinLeiBean;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.PingJianResultBean;
 import com.example.admin.quwang.bean.ShangPinXiangQingBean;
+import com.example.admin.quwang.bean.ShouCangBean;
 import com.example.admin.quwang.bean.ShouYeBean;
 import com.example.admin.quwang.bean.WebResultBean;
 import com.example.admin.quwang.bean.WelcomeBean;
@@ -17,14 +20,17 @@ import com.example.admin.quwang.bean.XiangQingImageResultBean;
 import com.example.admin.quwang.bean.XiangQingResultBean;
 import com.example.admin.quwang.callback.OnLoadFinishListenr;
 import com.example.admin.quwang.callback.SimpleCallBack;
+import com.example.admin.quwang.http.AddGouWuCheService;
 import com.example.admin.quwang.http.AllCatrgoryService;
 import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.FaXianSerevice;
+import com.example.admin.quwang.http.GoodsAttrService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
 import com.example.admin.quwang.http.PeiLeiService;
 import com.example.admin.quwang.http.PingJiaService;
 import com.example.admin.quwang.http.ShangPinService;
+import com.example.admin.quwang.http.ShouCangService;
 import com.example.admin.quwang.http.ShouYeService;
 import com.example.admin.quwang.http.WebService;
 import com.example.admin.quwang.http.WelcomeService;
@@ -42,6 +48,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
 
 /**
  * Created by admin on 2017/3/25.
@@ -153,5 +160,14 @@ public class HttpUtils {
     }
     public static void loadFaXianBean(OnLoadFinishListenr<FaXianBean> onLoadFinishListenr){
         retrofit.create(FaXianSerevice.class).getFaXianBean().enqueue(new SimpleCallBack<FaXianBean>(onLoadFinishListenr));
+    }
+    public static void shouCang(int goodsId,OnLoadFinishListenr<ShouCangBean> onLoadFinishListenr){
+        retrofit.create(ShouCangService.class).shouCang(goodsId).enqueue(new SimpleCallBack<ShouCangBean>(onLoadFinishListenr));
+    }
+    public static void addGouWuChe(int goods_id, int specid, int goods_number, String action, int special_type, int special_id, int zt_id, int referer_type, OnLoadFinishListenr<AddCaetBean> onLoadFinishListenr){
+        retrofit.create(AddGouWuCheService.class).add(goods_id,specid,goods_number,action,special_type,special_id,zt_id,referer_type).enqueue(new SimpleCallBack<AddCaetBean>(onLoadFinishListenr));
+    }
+    public static void getGoodsAttr(int goods_id, OnLoadFinishListenr<GoodsAttrBean> onLoadFinishListenr){
+        retrofit.create(GoodsAttrService.class).getGoodsAttr(goods_id).enqueue(new SimpleCallBack<GoodsAttrBean>(onLoadFinishListenr));
     }
 }

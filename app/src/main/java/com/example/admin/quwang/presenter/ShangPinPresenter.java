@@ -10,19 +10,23 @@ import com.example.admin.quwang.model.ShangPinModelImpl;
 import com.example.admin.quwang.utils.HttpUtils;
 import com.example.admin.quwang.view.ShangPinView;
 
+import java.lang.ref.SoftReference;
+
 /**
  * Created by admin on 2017/3/30.
  */
 
 public class ShangPinPresenter implements OnLoadFinishListenr<BaseBean<ShangPinXiangQingBean>> {
     ShangPinModel shangPinModel = new ShangPinModelImpl();
-    ShangPinView shangPinView;
+    SoftReference<ShangPinView> shangPinView;
 
     public void setShangPinView(ShangPinView shangPinView) {
-        this.shangPinView = shangPinView;
+        this.shangPinView = new SoftReference<ShangPinView>(shangPinView);
     }
 
     public void getShangPinXiangQingBean(int goodsid, int special_id, int special_type) {
+        ShangPinView shangPinView = this.shangPinView.get();
+        if(shangPinView==null)return;
         shangPinView.showLoading();
 
         HttpUtils.loadShangPinXiangQingBean(goodsid, special_id, special_type, this);
@@ -30,6 +34,8 @@ public class ShangPinPresenter implements OnLoadFinishListenr<BaseBean<ShangPinX
 
     @Override
     public void onSuccess(BaseBean<ShangPinXiangQingBean> bean, int type) {
+        ShangPinView shangPinView = this.shangPinView.get();
+        if(shangPinView==null)return;
         shangPinView.relashGoodsGallery(bean.getData().getGoods_gallery());
         shangPinView.relashGoodsInfo(bean.getData().getGoods_info());
         shangPinView.relashQuanBean(bean.getData().getBonus_info());
@@ -40,6 +46,8 @@ public class ShangPinPresenter implements OnLoadFinishListenr<BaseBean<ShangPinX
 
     @Override
     public void onError(String msg, int errorCode) {
+        ShangPinView shangPinView = this.shangPinView.get();
+        if(shangPinView==null)return;
         shangPinView.showError();
         Log.e("error", msg+"---->"+errorCode);
 
