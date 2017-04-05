@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"><TextView
-    android:id="@+id/tv"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" /></FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#fff"
+            android:gravity="center"
+            android:text="购物车"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/choose"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:background="#e6e5e7">
+            <CheckBox
+            android:layout_centerVertical="true"
+                android:id="@+id/quanuan"
+                android:text="全选"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+            <TextView
+                android:id="@+id/priceTv"
+                android:textColor="#f00"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/quanuan"
+                android:layout_marginLeft="10dp"
+                android:text="总金额:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/jiesuan"
+                android:text="去结算"
+                android:enabled="false"
+                android:textColor="#fff"
+                android:background="#f00"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <com.example.admin.quwang.view.extend.SuperRecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/choose"
+            android:layout_below="@id/title"></com.example.admin.quwang.view.extend.SuperRecyclerView>
+
+        <TextView
+            android:id="@+id/nodatTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            android:background="#e6e5e7"
+            android:gravity="center"
+            android:text="还未添加商品"
+            android:textSize="25sp"
+            android:visibility="gone" />
+    </RelativeLayout>
 </layout>

@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public abstract class BaseHeadAndFooterAdapter<B, T extends BaseHolder> extends RecyclerView.Adapter {
-    private Context ctx;
+     Context ctx;
     protected List<View> heads = new ArrayList<>();
     protected List<View> footers = new ArrayList<>();
     protected List<B> list = new ArrayList<>();
@@ -110,11 +110,16 @@ public abstract class BaseHeadAndFooterAdapter<B, T extends BaseHolder> extends 
     protected abstract T onCreateViewHolderImpl(ViewGroup parent, int viewType);
 
     @Override
-    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public  void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position >= heads.size() && position < list.size()+heads.size()) {
             T h = (T) holder;
             h.bind(list.get(position-heads.size()));
+            initListener(h,position-heads.size());
         }
+    }
+
+    protected void initListener(T h, int position) {
+
     }
 
     @Override

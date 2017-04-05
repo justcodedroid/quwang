@@ -5,6 +5,7 @@
     <string name="yuexiao">月销</string>
     <string name="fenge"> | </string>
     <string name="pingjia"> 评价 </string>
+    <string name="kong"> </string>
     <string-array name="shanxuan">
         <item>价格</item>
         <item>特点</item>

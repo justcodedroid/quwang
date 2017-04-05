@@ -8,6 +8,9 @@ import com.example.admin.quwang.bean.CategoryList;
 import com.example.admin.quwang.bean.DetailsBean;
 import com.example.admin.quwang.bean.FaXianBean;
 import com.example.admin.quwang.bean.GoodsAttrBean;
+import com.example.admin.quwang.bean.GouWuCheBean;
+import com.example.admin.quwang.bean.Pay;
+import com.example.admin.quwang.bean.PayBean;
 import com.example.admin.quwang.bean.PinLeiBean;
 import com.example.admin.quwang.bean.PingJiaBean;
 import com.example.admin.quwang.bean.PingJianResultBean;
@@ -25,13 +28,17 @@ import com.example.admin.quwang.http.AllCatrgoryService;
 import com.example.admin.quwang.http.DetailsService;
 import com.example.admin.quwang.http.FaXianSerevice;
 import com.example.admin.quwang.http.GoodsAttrService;
+import com.example.admin.quwang.http.GouWuCheService;
 import com.example.admin.quwang.http.HeadsInterceptor;
 import com.example.admin.quwang.http.HttpModel;
+import com.example.admin.quwang.http.OrderService;
+import com.example.admin.quwang.http.PayService;
 import com.example.admin.quwang.http.PeiLeiService;
 import com.example.admin.quwang.http.PingJiaService;
 import com.example.admin.quwang.http.ShangPinService;
 import com.example.admin.quwang.http.ShouCangService;
 import com.example.admin.quwang.http.ShouYeService;
+import com.example.admin.quwang.http.UpdateGouWuCheService;
 import com.example.admin.quwang.http.WebService;
 import com.example.admin.quwang.http.WelcomeService;
 import com.example.admin.quwang.http.XiangQingImageBeanService;
@@ -158,16 +165,45 @@ public class HttpUtils {
     public static void loadAllCategoryBeans(OnLoadFinishListenr<BaseBean<CategoryList>> onLoadFinishListenr) {
         retrofit.create(AllCatrgoryService.class).getAllCategortBeans().enqueue(new SimpleCallBack<BaseBean<CategoryList>>(onLoadFinishListenr));
     }
-    public static void loadFaXianBean(OnLoadFinishListenr<FaXianBean> onLoadFinishListenr){
+
+    public static void loadFaXianBean(OnLoadFinishListenr<FaXianBean> onLoadFinishListenr) {
         retrofit.create(FaXianSerevice.class).getFaXianBean().enqueue(new SimpleCallBack<FaXianBean>(onLoadFinishListenr));
     }
-    public static void shouCang(int goodsId,OnLoadFinishListenr<ShouCangBean> onLoadFinishListenr){
+
+    public static void shouCang(int goodsId, OnLoadFinishListenr<ShouCangBean> onLoadFinishListenr) {
         retrofit.create(ShouCangService.class).shouCang(goodsId).enqueue(new SimpleCallBack<ShouCangBean>(onLoadFinishListenr));
     }
-    public static void addGouWuChe(int goods_id, int specid, int goods_number, String action, int special_type, int special_id, int zt_id, int referer_type, OnLoadFinishListenr<AddCaetBean> onLoadFinishListenr){
-        retrofit.create(AddGouWuCheService.class).add(goods_id,specid,goods_number,action,special_type,special_id,zt_id,referer_type).enqueue(new SimpleCallBack<AddCaetBean>(onLoadFinishListenr));
+
+    public static void addGouWuChe(int goods_id, int specid, int goods_number, String action, int special_type, int special_id, int zt_id, int referer_type, OnLoadFinishListenr<AddCaetBean> onLoadFinishListenr) {
+        retrofit.create(AddGouWuCheService.class).add(goods_id, specid, goods_number, action, special_type, special_id, zt_id, referer_type).enqueue(new SimpleCallBack<AddCaetBean>(onLoadFinishListenr));
     }
-    public static void getGoodsAttr(int goods_id, OnLoadFinishListenr<GoodsAttrBean> onLoadFinishListenr){
+
+    public static void getGoodsAttr(int goods_id, OnLoadFinishListenr<GoodsAttrBean> onLoadFinishListenr) {
         retrofit.create(GoodsAttrService.class).getGoodsAttr(goods_id).enqueue(new SimpleCallBack<GoodsAttrBean>(onLoadFinishListenr));
     }
+
+    public static void getGouWuChe(OnLoadFinishListenr<GouWuCheBean> onLoadFinishListenr) {
+        retrofit.create(GouWuCheService.class).getGouWuChe().enqueue(new SimpleCallBack<GouWuCheBean>(onLoadFinishListenr));
+    }
+
+    public static void deleteWouWuChe(int recId, OnLoadFinishListenr<BaseBean<Object>> listenr) {
+        retrofit.create(GouWuCheService.class).delete(recId).enqueue(new SimpleCallBack<BaseBean<Object>>(listenr));
+    }
+
+    public static void increaseGouWuChe(int recId, OnLoadFinishListenr<BaseBean<Object>> listenr) {
+        retrofit.create(UpdateGouWuCheService.class).update(recId, "increase").enqueue(new SimpleCallBack<BaseBean<Object>>(listenr));
+    }
+
+    public static void decreaseGouWuChe(int recId, OnLoadFinishListenr<BaseBean<Object>> listenr) {
+        retrofit.create(UpdateGouWuCheService.class).update(recId, "decrease").enqueue(new SimpleCallBack<BaseBean<Object>>(listenr));
+    }
+
+    public static void createOrder(String ids, OnLoadFinishListenr<PayBean> listenr) {
+        retrofit.create(OrderService.class).get(ids, 9099686, "alipay").enqueue(new SimpleCallBack<PayBean>(listenr));
+    }
+
+    public static void pay(long sign, OnLoadFinishListenr<Pay> listenr) {
+        retrofit.create(PayService.class).getPay(sign).enqueue(new SimpleCallBack<Pay>(listenr));
+    }
+
 }
